@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>9F | Semangat Kemerdekaan</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#080808;
+    color:white;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
+
+.particle{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    opacity:.3;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-10vh);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:75px;
+
+    padding:0 7%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    z-index:100;
+
+    transition:.3s;
+}
+
+nav.scrolled{
+    background:#080808e8;
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:-3px;
+}
+
+.logo span{
+    color:#ed1937;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+}
+
+.nav-links a{
+    position:relative;
+
+    color:#aaa;
+
+    font-size:11px;
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-links a::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-8px;
+
+    width:0;
+    height:2px;
+
+    background:#ed1937;
+
+    transition:.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.menu{
+    display:none;
+
+    border:0;
+    background:none;
+
+    color:white;
+
+    font-size:27px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    min-height:100vh;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    padding:120px 9%;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 80% 45%,
+            #a90020 0%,
+            #48000e 25%,
+            #090909 65%
+        );
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    right:-150px;
+    top:20%;
+
+    border-radius:50%;
+
+    border:1px solid #ffffff20;
+
+    box-shadow:
+        0 0 0 70px #ffffff08,
+        0 0 0 140px #ffffff04;
+
+    animation:rotate 25s linear infinite;
+}
+
+@keyframes rotate{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:5;
+
+    max-width:800px;
+
+    animation:heroIn 1s ease;
+}
+
+@keyframes heroIn{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.small-title{
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    color:#aaa;
+
+    font-weight:bold;
+
+    margin-bottom:25px;
+}
+
+.hero h1{
+
+    font-family:Georgia, serif;
+
+    font-size:clamp(
+        65px,
+        10vw,
+        130px
+    );
+
+    line-height:.82;
+
+    letter-spacing:-6px;
+}
+
+.hero h1 .red{
+    color:#ed1937;
+}
+
+.hero h1 .thin{
+    font-weight:normal;
+}
+
+.hero-description{
+
+    max-width:550px;
+
+    color:#aaa;
+
+    line-height:1.8;
+
+    font-size:14px;
+
+    margin:35px 0;
+}
+
+.buttons{
+
+    display:flex;
+
+    gap:12px;
+}
+
+.button{
+
+    padding:16px 23px;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    transition:.3s;
+}
+
+.button.red{
+
+    background:#ed1937;
+}
+
+.button.red:hover{
+
+    background:white;
+
+    color:#111;
+
+    transform:translateY(-5px);
+}
+
+.button.outline{
+
+    border:1px solid #ffffff40;
+}
+
+.button.outline:hover{
+
+    border-color:white;
+
+    transform:translateY(-5px);
+}
+
+.big-nine{
+
+    position:absolute;
+
+    right:9%;
+
+    top:32%;
+
+    font-size:170px;
+
+    font-weight:900;
+
+    color:#ffffff05;
+
+    z-index:2;
+
+    animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+
+    50%{
+        transform:translateY(-20px);
+    }
+
+}
+
+
+/* =========================
+   MARQUEE
+========================= */
+
+.marquee{
+
+    height:60px;
+
+    background:#ed1937;
+
+    display:flex;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+}
+
+.marquee-content{
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:4px;
+
+    animation:marquee 18s linear infinite;
+}
+
+@keyframes marquee{
+
+    to{
+        transform:translateX(-50%);
+    }
+
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+section:not(.hero){
+
+    padding:110px 9%;
+}
+
+.section-label{
+
+    font-size:10px;
+
+    color:#ed1937;
+
+    font-weight:bold;
+
+    letter-spacing:4px;
+
+    margin-bottom:20px;
+}
+
+.section-title{
+
+    font-family:Georgia, serif;
+
+    font-size:clamp(
+        45px,
+        6vw,
+        80px
+    );
+
+    line-height:.95;
+
+    letter-spacing:-4px;
+
+    margin-bottom:60px;
+}
+
+.section-title span{
+
+    color:#ed1937;
+
+    font-style:italic;
+}
+
+
+/* =========================
+   TENTANG 9F
+========================= */
+
+.about{
+
+    background:#f3f1ed;
+
+    color:#111;
+}
+
+.about-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr;
+
+    gap:15px;
+}
+
+.about-card{
+
+    min-height:310px;
+
+    padding:38px;
+
+    background:white;
+
+    transition:.4s;
+}
+
+.about-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+        0 25px 50px #0002;
+}
+
+.about-card.red{
+
+    background:#ed1937;
+
+    color:white;
+}
+
+.about-card.black{
+
+    background:#111;
+
+    color:white;
+}
+
+.about-icon{
+
+    font-size:35px;
+}
+
+.about-card h3{
+
+    font-family:Georgia, serif;
+
+    font-size:40px;
+
+    margin-top:65px;
+
+    line-height:.95;
+}
+
+.about-card p{
+
+    font-size:12px;
+
+    line-height:1.8;
+
+    color:#777;
+
+    margin-top:20px;
+}
+
+.about-card.red p,
+.about-card.black p{
+
+    color:#ccc;
+}
+
+
+/* =========================
+   GALERI
+========================= */
+
+.gallery{
+
+    background:#fff;
+
+    color:#111;
+}
+
+.gallery-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.3fr 1fr 1fr;
+
+    grid-template-rows:
+        250px 250px;
+
+    gap:12px;
+}
+
+.gallery-item{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    padding:25px;
+
+    color:white;
+
+    cursor:pointer;
+
+    background-size:cover;
+
+    background-position:center;
+
+    transition:.5s;
+}
+
+.gallery-item:hover{
+
+    transform:scale(.98);
+}
+
+.gallery-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.9)
+        );
+}
+
+
+/* FOTO CONTOH */
+
+.gallery-item:nth-child(1){
+
+    grid-row:span 2;
+
+    background-image:url(
+        "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=85"
+    );
+}
+
+.gallery-item:nth-child(2){
+
+    background-image:url(
+        "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85"
+    );
+}
+
+.gallery-item:nth-child(3){
+
+    background-image:url(
+        "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1000&q=85"
+    );
+}
+
+.gallery-item:nth-child(4){
+
+    background-image:url(
+        "https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1000&q=85"
+    );
+}
+
+.gallery-item:nth-child(5){
+
+    background-image:url(
+        "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=85"
+    );
+}
+
+.gallery-text{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.gallery-text small{
+
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+.gallery-text h3{
+
+    font-family:Georgia, serif;
+
+    font-size:27px;
+
+    margin-top:5px;
+}
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#000e;
+
+    z-index:1000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:30px;
+}
+
+.lightbox.open{
+
+    display:flex;
+}
+
+.lightbox img{
+
+    max-width:90vw;
+
+    max-height:85vh;
+
+    border:2px solid #ffffff20;
+
+    box-shadow:
+        0 30px 100px #000;
+}
+
+.close{
+
+    position:absolute;
+
+    top:20px;
+
+    right:30px;
+
+    background:none;
+
+    border:0;
+
+    color:white;
+
+    font-size:40px;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   PLAYLIST
+========================= */
+
+.playlist{
+
+    background:#080808;
+}
+
+.playlist-box{
+
+    min-height:500px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    padding:60px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            110deg,
+            #151515,
+            #610012
+        );
+}
+
+.vinyl{
+
+    width:300px;
+
+    height:300px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #050505 0px,
+            #181818 3px,
+            #050505 6px
+        );
+
+    box-shadow:
+        0 30px 70px #000b;
+
+    animation:
+        vinylSpin 10s linear infinite;
+}
+
+@keyframes vinylSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.vinyl::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:110px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    background:#ed1937;
+}
+
+.vinyl span{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:25px;
+
+    font-weight:900;
+}
+
+.playlist-text{
+
+    max-width:450px;
+}
+
+.playlist-text h2{
+
+    font-family:Georgia, serif;
+
+    font-size:70px;
+
+    line-height:.9;
+}
+
+.playlist-text h2 span{
+
+    color:#ed1937;
+}
+
+.playlist-text p{
+
+    color:#aaa;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    margin:25px 0;
+}
+
+.spotify{
+
+    display:inline-block;
+
+    padding:16px 25px;
+
+    border-radius:50px;
+
+    background:#1ed760;
+
+    color:#061b0b;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.spotify:hover{
+
+    transform:scale(1.05);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    padding:45px 9%;
+
+    background:#080808;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.footer-logo{
+
+    font-size:35px;
+
+    font-weight:900;
+}
+
+.footer-logo span{
+
+    color:#ed1937;
+}
+
+footer p{
+
+    color:#777;
+
+    font-size:10px;
+}
+
+#semangat{
+
+    background:none;
+
+    border:1px solid #444;
+
+    color:white;
+
+    padding:12px 18px;
+
+    cursor:pointer;
+
+    font-size:9px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+#semangat:hover{
+
+    border-color:white;
+}
+
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(35px);
+
+    transition:
+        opacity .8s,
+        transform .8s;
+}
+
+.reveal.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    nav{
+
+        padding:0 6%;
+    }
+
+    .menu{
+
+        display:block;
+    }
+
+    .nav-links{
+
+        display:none;
+
+        position:absolute;
+
+        top:65px;
+
+        left:0;
+
+        width:100%;
+
+        padding:25px;
+
+        background:#090909;
+
+        flex-direction:column;
+
+        gap:20px;
+    }
+
+    .nav-links.open{
+
+        display:flex;
+    }
+
+    .hero{
+
+        padding:
+            120px 7%
+            90px;
+    }
+
+    .hero h1{
+
+        font-size:60px;
+
+        letter-spacing:-3px;
+    }
+
+    .big-nine{
+
+        font-size:100px;
+
+        right:5%;
+
+        opacity:.5;
+    }
+
+    .about-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .gallery-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            200px
+            200px
+            200px;
+    }
+
+    .gallery-item:nth-child(1){
+
+        grid-row:span 2;
+    }
+
+    .gallery-item:nth-child(5){
+
+        grid-column:span 2;
+    }
+
+    .playlist-box{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:50px;
+
+        padding:50px 25px;
+    }
+
+    .vinyl{
+
+        width:230px;
+
+        height:230px;
+    }
+
+    .playlist-text h2{
+
+        font-size:55px;
+    }
+
+    footer{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- PARTICLES -->
+
+<div id="particles"></div>
+
+
+<!-- NAVBAR -->
+
+<nav id="navbar">
+
+    <a href="#home" class="logo">
+        9<span>F.</span>
+    </a>
+
+    <button
+        class="menu"
+        id="menu"
+    >
+        ☰
+    </button>
+
+    <div
+        class="nav-links"
+        id="navLinks"
+    >
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#galeri">
+            Galeri
+        </a>
+
+        <a href="#playlist">
+            Playlist
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="hero-content">
+
+        <div class="small-title">
+
+            🇮🇩 DIRGAHAYU
+            REPUBLIK INDONESIA 🇮🇩
+
+        </div>
+
+        <h1>
+
+            Kelas
+            <span class="red">
+                9F
+            </span>
+
+            <br>
+
+            <span class="thin">
+                Semangat.
+            </span>
+
+            <br>
+
+            Solid.
+            <span class="red">
+                Merdeka.
+            </span>
+
+        </h1>
+
+        <p class="hero-description">
+
+            Satu kelas.
+            Satu perjuangan.
+            Satu semangat.
+
+            Bersama 9F, kita berikan
+            yang terbaik untuk lomba
+            17 Agustus.
+
+        </p>
+
+        <div class="buttons">
+
+            <a
+                href="#galeri"
+                class="button red"
+            >
+
+                LIHAT GALERI →
+
+            </a>
+
+            <a
+                href="#playlist"
+                class="button outline"
+            >
+
+                ▶ PLAYLIST
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="big-nine">
+        9F
+    </div>
+
+</section>
+
+
+<!-- MARQUEE -->
+
+<div class="marquee">
+
+    <div class="marquee-content">
+
+        🇮🇩 MERDEKA •
+        9F BERANI •
+        9F KOMPAK •
+        9F SOLID •
+        INDONESIA TANGGUH •
+
+        🇮🇩 MERDEKA •
+        9F BERANI •
+        9F KOMPAK •
+        9F SOLID •
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TENTANG
+========================= -->
+
+<section class="about">
+
+    <div class="section-label">
+        TENTANG 9F
+    </div>
+
+    <h2 class="section-title reveal">
+
+        Bukan sekadar
+        <span>
+            kelas.
+        </span>
+
+    </h2>
+
+
+    <div class="about-grid">
+
+
+        <div class="about-card red reveal">
+
+            <div>
+                01
+            </div>
+
+            <h3>
+
+                Semangat
+                <br>
+                17 Agustus
+
+            </h3>
+
+            <p>
+
+                Merayakan kemerdekaan
+                dengan kebersamaan,
+                kreativitas, sportivitas,
+                dan semangat pantang
+                menyerah.
+
+            </p>
+
+        </div>
+
+
+        <div class="about-card reveal">
+
+            <div class="about-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Berani
+            </h3>
+
+            <p>
+
+                Berani tampil,
+                berani mencoba,
+                dan berani memberikan
+                yang terbaik.
+
+            </p>
+
+        </div>
+
+
+        <div class="about-card black reveal">
+
+            <div class="about-icon">
+                🤝
+            </div>
+
+            <h3>
+                Kompak
+            </h3>
+
+            <p>
+
+                Kemenangan terasa
+                lebih seru ketika
+                diraih bersama-sama.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     GALERI
+========================= -->
+
+<section
+    class="gallery"
+    id="galeri"
+>
+
+    <div class="section-label">
+        MOMEN 9F
+    </div>
+
+    <h2 class="section-title reveal">
+
+        Galeri
+        <span>
+            Perjuangan.
+        </span>
+
+    </h2>
+
+
+    <div class="gallery-grid">
+
+
+        <div
+            class="gallery-item reveal"
+            data-image="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1600&q=90"
+        >
+
+            <div class="gallery-text">
+
+                <small>
+                    01
+                </small>
+
+                <h3>
+                    Persiapan
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="gallery-item reveal"
+            data-image="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=90"
+        >
+
+            <div class="gallery-text">
+
+                <small>
+                    02
+                </small>
+
+                <h3>
+                    Kebersamaan
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="gallery-item reveal"
+            data-image="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=90"
+        >
+
+            <div class="gallery-text">
+
+                <small>
+                    03
+                </small>
+
+                <h3>
+                    Semangat
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="gallery-item reveal"
+            data-image="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1600&q=90"
+        >
+
+            <div class="gallery-text">
+
+                <small>
+                    04
+                </small>
+
+                <h3>
+                    17 Agustus
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="gallery-item reveal"
+            data-image="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=90"
+        >
+
+            <div class="gallery-text">
+
+                <small>
+                    05
+                </small>
+
+                <h3>
+                    9F Solid
+                </h3>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+>
+
+    <button
+        class="close"
+        id="close"
+    >
+        ×
+    </button>
+
+    <img
+        id="lightboxImg"
+        src=""
+        alt="Foto kelas 9F"
+    >
+
+</div>
+
+
+<!-- =========================
+     PLAYLIST
+========================= -->
+
+<section
+    class="playlist"
+    id="playlist"
+>
+
+    <div class="playlist-box">
+
+
+        <div class="vinyl">
+
+            <span>
+                9F
+            </span>
+
+        </div>
+
+
+        <div class="playlist-text">
+
+            <div class="section-label">
+
+                SOUNDTRACK 9F
+
+            </div>
+
+            <h2>
+
+                Playlist
+                <br>
+
+                <span>
+                    Semangat.
+                </span>
+
+            </h2>
+
+            <p>
+
+                Putar playlist pilihan
+                kelas 9F dan nikmati
+                musik sambil merayakan
+                semangat kemerdekaan.
+
+            </p>
+
+
+            <!-- PLAYLIST SPOTIFY KAMU -->
+
+            <a
+                class="spotify"
+                href="https://open.spotify.com/playlist/2trxdNXt3IPF10skOMox8A?si=qmaMws2PQdapq45TeSNyxQ&utm_source=whatsapp&pi=UuR4Q5nxS1C09&sci=spotify%3Acard-config%3A5XZh3hcDuQ0ibbHAQNyLkx"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                🎵 BUKA PLAYLIST 9F →
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        9<span>F.</span>
+
+    </div>
+
+    <p>
+
+        © 2026 Kelas 9F
+        • Semangat Indonesia 🇮🇩
+
+    </p>
+
+    <button id="semangat">
+
+        🇮🇩 NYALAKAN SEMANGAT
+
+    </button>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   MENU HP
+========================= */
+
+const menu =
+document.getElementById("menu");
+
+const navLinks =
+document.getElementById("navLinks");
+
+menu.onclick = () => {
+
+    navLinks.classList.toggle(
+        "open"
+    );
+
+};
+
+
+document
+.querySelectorAll(".nav-links a")
+.forEach(link => {
+
+    link.onclick = () => {
+
+        navLinks.classList.remove(
+            "open"
+        );
+
+    };
+
+});
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+const navbar =
+document.getElementById("navbar");
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        navbar.classList.toggle(
+            "scrolled",
+            window.scrollY > 40
+        );
+
+    }
+);
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+const particles =
+document.getElementById(
+    "particles"
+);
+
+for(
+    let i = 0;
+    i < 35;
+    i++
+){
+
+    const particle =
+        document.createElement(
+            "div"
+        );
+
+    particle.className =
+        "particle";
+
+    particle.style.left =
+        Math.random() * 100 +
+        "%";
+
+    particle.style.animationDuration =
+        8 +
+        Math.random() * 12 +
+        "s";
+
+    particle.style.animationDelay =
+        -Math.random() * 15 +
+        "s";
+
+    particles.appendChild(
+        particle
+    );
+
+}
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer =
+new IntersectionObserver(
+
+    entries => {
+
+        entries.forEach(
+            entry => {
+
+                if(
+                    entry.isIntersecting
+                ){
+
+                    entry.target
+                        .classList
+                        .add("show");
+
+                }
+
+            }
+        );
+
+    },
+
+    {
+        threshold:.12
+    }
+
+);
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(
+    element =>
+    observer.observe(element)
+);
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+const lightbox =
+document.getElementById(
+    "lightbox"
+);
+
+const lightboxImg =
+document.getElementById(
+    "lightboxImg"
+);
+
+
+document
+.querySelectorAll(".gallery-item")
+.forEach(item => {
+
+    item.addEventListener(
+        "click",
+        () => {
+
+            lightboxImg.src =
+                item.dataset.image;
+
+            lightbox.classList.add(
+                "open"
+            );
+
+        }
+    );
+
+});
+
+
+document
+.getElementById("close")
+.onclick = () => {
+
+    lightbox.classList.remove(
+        "open"
+    );
+
+};
+
+
+lightbox.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            lightbox
+        ){
+
+            lightbox.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Escape"
+        ){
+
+            lightbox.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   TOMBOL SEMANGAT
+========================= */
+
+document
+.getElementById("semangat")
+.onclick = () => {
+
+    const emoji = [
+        "🇮🇩",
+        "🔥",
+        "🎉",
+        "⭐"
+    ];
+
+
+    for(
+        let i = 0;
+        i < 20;
+        i++
+    ){
+
+        const element =
+            document.createElement(
+                "div"
+            );
+
+        element.textContent =
+            emoji[
+                Math.floor(
+                    Math.random() *
+                    emoji.length
+                )
+            ];
+
+
+        element.style.position =
+            "fixed";
+
+        element.style.left =
+            Math.random() *
+            100 +
+            "vw";
+
+        element.style.bottom =
+            "20px";
+
+        element.style.fontSize =
+            20 +
+            Math.random() *
+            25 +
+            "px";
+
+        element.style.zIndex =
+            "9999";
+
+        element.style.pointerEvents =
+            "none";
+
+        element.style.transition =
+            "1.5s";
+
+
+        document.body.appendChild(
+            element
+        );
+
+
+        setTimeout(
+            () => {
+
+                element.style.transform =
+                    `translateY(-${
+                        300 +
+                        Math.random() *
+                        400
+                    }px)
+                    rotate(${
+                        Math.random() *
+                        360
+                    }deg)`;
+
+                element.style.opacity =
+                    "0";
+
+            },
+            50
+        );
+
+
+        setTimeout(
+            () => {
+
+                element.remove();
+
+            },
+            1600
+        );
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
