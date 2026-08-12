@@ -4,9 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>9F | Semangat Kemerdekaan</title>
+<title>9F | MERDEKA 🇮🇩</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
+
+/* =========================
+   RESET
+========================= */
+
 *{
     margin:0;
     padding:0;
@@ -18,216 +27,793 @@ html{
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#080808;
+    font-family:Poppins,sans-serif;
+    background:#070707;
     color:white;
     overflow-x:hidden;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-
 /* =========================
-   PARTICLES
+   BACKGROUND
 ========================= */
 
-#particles{
+body::before{
+    content:"";
     position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:1;
-}
-
-.particle{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:white;
+    width:500px;
+    height:500px;
     border-radius:50%;
-    opacity:.3;
-    animation:fall linear infinite;
+    background:rgba(220,0,25,.18);
+    filter:blur(120px);
+    top:-200px;
+    left:-150px;
+    z-index:-2;
 }
 
-@keyframes fall{
-    from{
-        transform:translateY(-10vh);
-    }
-    to{
-        transform:translateY(110vh);
-    }
+body::after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+    filter:blur(120px);
+    right:-200px;
+    bottom:-150px;
+    z-index:-2;
 }
-
 
 /* =========================
    NAVBAR
 ========================= */
 
-nav{
+.navbar{
     position:fixed;
-    top:0;
-    left:0;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
 
-    width:100%;
-    height:75px;
-
-    padding:0 7%;
+    width:min(1100px,92%);
+    height:65px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    z-index:100;
+    padding:0 20px;
 
-    transition:.3s;
-}
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
 
-nav.scrolled{
-    background:#080808e8;
-    backdrop-filter:blur(15px);
+    background:rgba(15,15,15,.75);
+    backdrop-filter:blur(20px);
+
+    z-index:999;
+
+    box-shadow:0 15px 50px rgba(0,0,0,.4);
 }
 
 .logo{
-    font-size:32px;
+    font-size:28px;
     font-weight:900;
     letter-spacing:-3px;
 }
 
 .logo span{
-    color:#ed1937;
+    color:#e50914;
 }
 
 .nav-links{
     display:flex;
-    gap:35px;
+    gap:5px;
 }
 
 .nav-links a{
-    position:relative;
-
     color:#aaa;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
 
-    font-size:11px;
-    font-weight:bold;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    transition:.3s;
-}
-
-.nav-links a:hover{
-    color:white;
-}
-
-.nav-links a::after{
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    bottom:-8px;
-
-    width:0;
-    height:2px;
-
-    background:#ed1937;
+    padding:10px 16px;
+    border-radius:12px;
 
     transition:.3s;
 }
 
-.nav-links a:hover::after{
-    width:100%;
+.nav-links a:hover,
+.nav-links a.active{
+    color:white;
+    background:#e50914;
 }
 
-.menu{
-    display:none;
+.flag{
+    width:30px;
+    height:20px;
+    overflow:hidden;
+    border-radius:3px;
+}
 
-    border:0;
-    background:none;
+.flag div{
+    height:50%;
+}
 
-    color:white;
+.flag .red{
+    background:#e50914;
+}
 
-    font-size:27px;
+.flag .white{
+    background:white;
 }
 
 
 /* =========================
-   HERO
+   HOME
 ========================= */
 
 .hero{
-
     min-height:100vh;
+
+    max-width:1200px;
+    margin:auto;
+
+    padding:150px 30px 90px;
+
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+
+    align-items:center;
+
+    gap:70px;
+}
+
+.hero-text{
+    animation:fadeUp 1s ease;
+}
+
+.badge{
+    display:inline-block;
+
+    padding:9px 15px;
+
+    border-radius:50px;
+
+    color:#ff5965;
+
+    background:rgba(229,9,20,.1);
+
+    border:1px solid rgba(229,9,20,.3);
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:1.5px;
+}
+
+.hero h1{
+    margin-top:25px;
+
+    font-size:clamp(80px,13vw,155px);
+
+    line-height:.78;
+
+    letter-spacing:-10px;
+
+    font-weight:900;
+}
+
+.hero h1 span{
+    color:#e50914;
+
+    text-shadow:
+        0 0 50px rgba(229,9,20,.35);
+}
+
+.hero h2{
+    margin-top:35px;
+
+    font-size:clamp(22px,3vw,36px);
+
+    line-height:1.2;
+}
+
+.hero h2 span{
+    color:#ff3947;
+}
+
+.hero-description{
+    margin-top:18px;
+
+    max-width:600px;
+
+    color:#999;
+
+    line-height:1.8;
+
+    font-size:14px;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+
+    margin-top:28px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 20px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.btn-red{
+    color:white;
+    background:#e50914;
+
+    box-shadow:
+        0 12px 35px rgba(229,9,20,.3);
+}
+
+.btn-red:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 20px 45px rgba(229,9,20,.5);
+}
+
+.btn-outline{
+    color:white;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.btn-outline:hover{
+    background:white;
+    color:black;
+}
+
+
+/* =========================
+   HERO CARD
+========================= */
+
+.hero-card{
+    width:310px;
+    height:420px;
+
+    justify-self:center;
+
+    padding:25px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d1d1d,
+            #090909
+        );
+
+    border:1px solid rgba(255,255,255,.1);
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.6);
+
+    transform:rotate(5deg);
+
+    animation:float 4s ease-in-out infinite;
 
     position:relative;
 
-    display:flex;
-    align-items:center;
-
-    padding:120px 9%;
-
     overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 80% 45%,
-            #a90020 0%,
-            #48000e 25%,
-            #090909 65%
-        );
 }
 
-.hero::after{
-
+.hero-card::before{
     content:"";
 
     position:absolute;
 
-    width:600px;
-    height:600px;
+    width:200px;
+    height:200px;
 
-    right:-150px;
-    top:20%;
+    background:#e50914;
 
     border-radius:50%;
 
-    border:1px solid #ffffff20;
+    filter:blur(80px);
+
+    opacity:.25;
+
+    top:-80px;
+    right:-80px;
+}
+
+.card-number{
+    display:flex;
+    justify-content:space-between;
+
+    font-size:23px;
+
+    font-weight:900;
+}
+
+.indonesia{
+    margin:70px auto 30px;
+
+    width:190px;
+    height:125px;
 
     box-shadow:
-        0 0 0 70px #ffffff08,
-        0 0 0 140px #ffffff04;
-
-    animation:rotate 25s linear infinite;
+        0 20px 50px rgba(0,0,0,.5);
 }
 
-@keyframes rotate{
-
-    to{
-        transform:rotate(360deg);
-    }
-
+.indonesia div{
+    height:50%;
 }
 
-.hero-content{
+.indonesia .r{
+    background:#e50914;
+}
 
+.indonesia .w{
+    background:white;
+}
+
+.hero-card h3{
+    text-align:center;
+
+    font-size:38px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.card-bottom{
+    text-align:center;
+
+    color:#777;
+
+    font-size:11px;
+
+    margin-top:10px;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider{
+    padding:18px 0;
+
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    overflow:hidden;
+    white-space:nowrap;
+
+    color:#666;
+
+    font-size:12px;
+    font-weight:700;
+
+    letter-spacing:2px;
+}
+
+.divider span{
+    display:inline-block;
+
+    animation:
+        moveText 20s linear infinite;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:120px 30px;
+}
+
+.section-title{
+    text-align:center;
+
+    margin-bottom:55px;
+}
+
+.section-title small{
+    color:#ff4653;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.section-title h2{
+    margin-top:8px;
+
+    font-size:clamp(42px,6vw,70px);
+
+    letter-spacing:-3px;
+}
+
+.section-title h2 span{
+    color:#e50914;
+}
+
+.section-title p{
+    margin-top:10px;
+
+    color:#888;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    grid-auto-rows:230px;
+
+    gap:14px;
+}
+
+.photo{
     position:relative;
 
-    z-index:5;
+    overflow:hidden;
 
-    max-width:800px;
+    border-radius:20px;
 
-    animation:heroIn 1s ease;
+    background:#151515;
+
+    border:0;
+
+    padding:0;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    transform:translateY(25px);
+
+    transition:
+        opacity .6s,
+        transform .4s,
+        box-shadow .4s;
 }
 
-@keyframes heroIn{
+.photo.show{
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+.photo:hover{
+    transform:
+        translateY(-7px)
+        scale(1.02) !important;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.5);
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:.6s;
+}
+
+.photo:hover img{
+    transform:scale(1.08);
+}
+
+.photo::after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            transparent 55%,
+            rgba(0,0,0,.7)
+        );
+
+    pointer-events:none;
+}
+
+.photo-number{
+    position:absolute;
+
+    z-index:2;
+
+    bottom:13px;
+    left:15px;
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+
+/* BENTUK GALERI */
+
+.photo:nth-child(1){
+    grid-column:span 2;
+}
+
+.photo:nth-child(4){
+    grid-column:span 2;
+}
+
+.photo:nth-child(9){
+    grid-column:span 2;
+}
+
+.photo:nth-child(6),
+.photo:nth-child(12){
+    grid-row:span 2;
+}
+
+
+/* =========================
+   PLAYLIST
+========================= */
+
+.spotify-card{
+    max-width:950px;
+
+    margin:auto;
+
+    padding:25px;
+
+    display:grid;
+
+    grid-template-columns:280px 1fr;
+
+    gap:25px;
+
+    border-radius:28px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    background:
+        linear-gradient(
+            145deg,
+            #161719,
+            #0c0d0f
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.4);
+}
+
+.music-info{
+    padding:15px;
+}
+
+.music-icon{
+    width:75px;
+    height:75px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#1ed760;
+
+    color:#000;
+
+    font-size:32px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 12px 40px rgba(30,215,96,.2);
+
+    animation:spin 6s linear infinite;
+}
+
+.music-info h3{
+    font-size:28px;
+
+    margin-top:25px;
+}
+
+.music-info p{
+    color:#888;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    margin:8px 0 22px;
+}
+
+.spotify-card iframe{
+    width:100%;
+
+    height:352px;
+
+    border:0;
+
+    border-radius:18px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+
+    padding:80px 20px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    color:#777;
+}
+
+.footer-logo{
+    font-size:45px;
+
+    font-weight:900;
+
+    color:white;
+}
+
+.footer-logo span{
+    color:#e50914;
+}
+
+footer p{
+    font-size:12px;
+
+    margin:8px 0 18px;
+}
+
+footer strong{
+    color:#e50914;
+}
+
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+.lightbox{
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.94);
+
+    z-index:2000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:40px;
+}
+
+.lightbox.show{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:90vw;
+    max-height:85vh;
+
+    object-fit:contain;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 30px 100px #000;
+}
+
+.close,
+.prev,
+.next{
+    position:fixed;
+
+    width:50px;
+    height:50px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    z-index:5;
+}
+
+.close{
+    top:20px;
+    right:20px;
+}
+
+.prev{
+    left:20px;
+}
+
+.next{
+    right:20px;
+}
+
+.counter{
+    position:fixed;
+
+    bottom:20px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:#aaa;
+
+    font-size:12px;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeUp{
 
     from{
         opacity:0;
-        transform:translateY(30px);
+        transform:translateY(35px);
     }
 
     to{
@@ -237,160 +823,35 @@ nav.scrolled{
 
 }
 
-.small-title{
-
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    color:#aaa;
-
-    font-weight:bold;
-
-    margin-bottom:25px;
-}
-
-.hero h1{
-
-    font-family:Georgia, serif;
-
-    font-size:clamp(
-        65px,
-        10vw,
-        130px
-    );
-
-    line-height:.82;
-
-    letter-spacing:-6px;
-}
-
-.hero h1 .red{
-    color:#ed1937;
-}
-
-.hero h1 .thin{
-    font-weight:normal;
-}
-
-.hero-description{
-
-    max-width:550px;
-
-    color:#aaa;
-
-    line-height:1.8;
-
-    font-size:14px;
-
-    margin:35px 0;
-}
-
-.buttons{
-
-    display:flex;
-
-    gap:12px;
-}
-
-.button{
-
-    padding:16px 23px;
-
-    font-size:10px;
-
-    font-weight:bold;
-
-    letter-spacing:1.5px;
-
-    transition:.3s;
-}
-
-.button.red{
-
-    background:#ed1937;
-}
-
-.button.red:hover{
-
-    background:white;
-
-    color:#111;
-
-    transform:translateY(-5px);
-}
-
-.button.outline{
-
-    border:1px solid #ffffff40;
-}
-
-.button.outline:hover{
-
-    border-color:white;
-
-    transform:translateY(-5px);
-}
-
-.big-nine{
-
-    position:absolute;
-
-    right:9%;
-
-    top:32%;
-
-    font-size:170px;
-
-    font-weight:900;
-
-    color:#ffffff05;
-
-    z-index:2;
-
-    animation:float 5s ease-in-out infinite;
-}
-
 @keyframes float{
 
+    0%,100%{
+        transform:
+            rotate(5deg)
+            translateY(0);
+    }
+
     50%{
-        transform:translateY(-20px);
+        transform:
+            rotate(2deg)
+            translateY(-18px);
     }
 
 }
 
+@keyframes spin{
 
-/* =========================
-   MARQUEE
-========================= */
+    to{
+        transform:rotate(360deg);
+    }
 
-.marquee{
-
-    height:60px;
-
-    background:#ed1937;
-
-    display:flex;
-
-    align-items:center;
-
-    overflow:hidden;
-
-    white-space:nowrap;
 }
 
-.marquee-content{
+@keyframes moveText{
 
-    font-size:11px;
-
-    font-weight:bold;
-
-    letter-spacing:4px;
-
-    animation:marquee 18s linear infinite;
-}
-
-@keyframes marquee{
+    from{
+        transform:translateX(0);
+    }
 
     to{
         transform:translateX(-50%);
@@ -400,687 +861,187 @@ nav.scrolled{
 
 
 /* =========================
-   SECTION
-========================= */
-
-section:not(.hero){
-
-    padding:110px 9%;
-}
-
-.section-label{
-
-    font-size:10px;
-
-    color:#ed1937;
-
-    font-weight:bold;
-
-    letter-spacing:4px;
-
-    margin-bottom:20px;
-}
-
-.section-title{
-
-    font-family:Georgia, serif;
-
-    font-size:clamp(
-        45px,
-        6vw,
-        80px
-    );
-
-    line-height:.95;
-
-    letter-spacing:-4px;
-
-    margin-bottom:60px;
-}
-
-.section-title span{
-
-    color:#ed1937;
-
-    font-style:italic;
-}
-
-
-/* =========================
-   TENTANG 9F
-========================= */
-
-.about{
-
-    background:#f3f1ed;
-
-    color:#111;
-}
-
-.about-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        2fr 1fr 1fr;
-
-    gap:15px;
-}
-
-.about-card{
-
-    min-height:310px;
-
-    padding:38px;
-
-    background:white;
-
-    transition:.4s;
-}
-
-.about-card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:
-        0 25px 50px #0002;
-}
-
-.about-card.red{
-
-    background:#ed1937;
-
-    color:white;
-}
-
-.about-card.black{
-
-    background:#111;
-
-    color:white;
-}
-
-.about-icon{
-
-    font-size:35px;
-}
-
-.about-card h3{
-
-    font-family:Georgia, serif;
-
-    font-size:40px;
-
-    margin-top:65px;
-
-    line-height:.95;
-}
-
-.about-card p{
-
-    font-size:12px;
-
-    line-height:1.8;
-
-    color:#777;
-
-    margin-top:20px;
-}
-
-.about-card.red p,
-.about-card.black p{
-
-    color:#ccc;
-}
-
-
-/* =========================
-   GALERI
-========================= */
-
-.gallery{
-
-    background:#fff;
-
-    color:#111;
-}
-
-.gallery-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1.3fr 1fr 1fr;
-
-    grid-template-rows:
-        250px 250px;
-
-    gap:12px;
-}
-
-.gallery-item{
-
-    position:relative;
-
-    overflow:hidden;
-
-    display:flex;
-
-    align-items:flex-end;
-
-    padding:25px;
-
-    color:white;
-
-    cursor:pointer;
-
-    background-size:cover;
-
-    background-position:center;
-
-    transition:.5s;
-}
-
-.gallery-item:hover{
-
-    transform:scale(.98);
-}
-
-.gallery-item::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(0,0,0,.9)
-        );
-}
-
-
-/* FOTO CONTOH */
-
-.gallery-item:nth-child(1){
-
-    grid-row:span 2;
-
-    background-image:url(
-        "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1200&q=85"
-    );
-}
-
-.gallery-item:nth-child(2){
-
-    background-image:url(
-        "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1000&q=85"
-    );
-}
-
-.gallery-item:nth-child(3){
-
-    background-image:url(
-        "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1000&q=85"
-    );
-}
-
-.gallery-item:nth-child(4){
-
-    background-image:url(
-        "https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1000&q=85"
-    );
-}
-
-.gallery-item:nth-child(5){
-
-    background-image:url(
-        "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=85"
-    );
-}
-
-.gallery-text{
-
-    position:relative;
-
-    z-index:2;
-}
-
-.gallery-text small{
-
-    font-size:9px;
-
-    letter-spacing:3px;
-}
-
-.gallery-text h3{
-
-    font-family:Georgia, serif;
-
-    font-size:27px;
-
-    margin-top:5px;
-}
-
-
-/* =========================
-   LIGHTBOX
-========================= */
-
-.lightbox{
-
-    position:fixed;
-
-    inset:0;
-
-    background:#000e;
-
-    z-index:1000;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:30px;
-}
-
-.lightbox.open{
-
-    display:flex;
-}
-
-.lightbox img{
-
-    max-width:90vw;
-
-    max-height:85vh;
-
-    border:2px solid #ffffff20;
-
-    box-shadow:
-        0 30px 100px #000;
-}
-
-.close{
-
-    position:absolute;
-
-    top:20px;
-
-    right:30px;
-
-    background:none;
-
-    border:0;
-
-    color:white;
-
-    font-size:40px;
-
-    cursor:pointer;
-}
-
-
-/* =========================
-   PLAYLIST
-========================= */
-
-.playlist{
-
-    background:#080808;
-}
-
-.playlist-box{
-
-    min-height:500px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-around;
-
-    padding:60px;
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            110deg,
-            #151515,
-            #610012
-        );
-}
-
-.vinyl{
-
-    width:300px;
-
-    height:300px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:
-        repeating-radial-gradient(
-            circle,
-            #050505 0px,
-            #181818 3px,
-            #050505 6px
-        );
-
-    box-shadow:
-        0 30px 70px #000b;
-
-    animation:
-        vinylSpin 10s linear infinite;
-}
-
-@keyframes vinylSpin{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-.vinyl::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:110px;
-
-    height:110px;
-
-    border-radius:50%;
-
-    background:#ed1937;
-}
-
-.vinyl span{
-
-    position:relative;
-
-    z-index:2;
-
-    font-size:25px;
-
-    font-weight:900;
-}
-
-.playlist-text{
-
-    max-width:450px;
-}
-
-.playlist-text h2{
-
-    font-family:Georgia, serif;
-
-    font-size:70px;
-
-    line-height:.9;
-}
-
-.playlist-text h2 span{
-
-    color:#ed1937;
-}
-
-.playlist-text p{
-
-    color:#aaa;
-
-    font-size:13px;
-
-    line-height:1.8;
-
-    margin:25px 0;
-}
-
-.spotify{
-
-    display:inline-block;
-
-    padding:16px 25px;
-
-    border-radius:50px;
-
-    background:#1ed760;
-
-    color:#061b0b;
-
-    font-size:11px;
-
-    font-weight:bold;
-
-    transition:.3s;
-}
-
-.spotify:hover{
-
-    transform:scale(1.05);
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-
-    padding:45px 9%;
-
-    background:#080808;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:20px;
-}
-
-.footer-logo{
-
-    font-size:35px;
-
-    font-weight:900;
-}
-
-.footer-logo span{
-
-    color:#ed1937;
-}
-
-footer p{
-
-    color:#777;
-
-    font-size:10px;
-}
-
-#semangat{
-
-    background:none;
-
-    border:1px solid #444;
-
-    color:white;
-
-    padding:12px 18px;
-
-    cursor:pointer;
-
-    font-size:9px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-}
-
-#semangat:hover{
-
-    border-color:white;
-}
-
-
-/* =========================
-   REVEAL
-========================= */
-
-.reveal{
-
-    opacity:0;
-
-    transform:translateY(35px);
-
-    transition:
-        opacity .8s,
-        transform .8s;
-}
-
-.reveal.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-}
-
-
-/* =========================
    MOBILE
 ========================= */
 
-@media(max-width:800px){
+@media(max-width:850px){
 
-    nav{
-
-        padding:0 6%;
+    .navbar{
+        height:58px;
     }
 
-    .menu{
+    .nav-links a{
+        font-size:11px;
 
-        display:block;
-    }
-
-    .nav-links{
-
-        display:none;
-
-        position:absolute;
-
-        top:65px;
-
-        left:0;
-
-        width:100%;
-
-        padding:25px;
-
-        background:#090909;
-
-        flex-direction:column;
-
-        gap:20px;
-    }
-
-    .nav-links.open{
-
-        display:flex;
+        padding:
+            8px 9px;
     }
 
     .hero{
 
-        padding:
-            120px 7%
-            90px;
-    }
-
-    .hero h1{
-
-        font-size:60px;
-
-        letter-spacing:-3px;
-    }
-
-    .big-nine{
-
-        font-size:100px;
-
-        right:5%;
-
-        opacity:.5;
-    }
-
-    .about-grid{
-
         grid-template-columns:1fr;
+
+        text-align:center;
+
+        padding-top:130px;
+
+        gap:70px;
     }
 
-    .gallery-grid{
+    .hero-description{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
+
+    .hero-card{
+        width:260px;
+        height:350px;
+    }
+
+    .indonesia{
+        width:160px;
+        height:105px;
+
+        margin:
+            50px auto 25px;
+    }
+
+    .hero-card h3{
+        font-size:30px;
+    }
+
+    .gallery{
 
         grid-template-columns:
-            1fr 1fr;
+            repeat(2,1fr);
 
-        grid-template-rows:
-            200px
-            200px
-            200px;
+        grid-auto-rows:190px;
+
+        gap:10px;
     }
 
-    .gallery-item:nth-child(1){
-
-        grid-row:span 2;
+    .photo:nth-child(n){
+        grid-column:auto;
+        grid-row:auto;
     }
 
-    .gallery-item:nth-child(5){
+    .photo:nth-child(1),
+    .photo:nth-child(4),
+    .photo:nth-child(9){
 
         grid-column:span 2;
     }
 
-    .playlist-box{
+    .spotify-card{
 
-        flex-direction:column;
+        grid-template-columns:1fr;
 
-        text-align:center;
-
-        gap:50px;
-
-        padding:50px 25px;
     }
 
-    .vinyl{
+}
 
-        width:230px;
 
-        height:230px;
+@media(max-width:500px){
+
+    .logo{
+        font-size:22px;
     }
 
-    .playlist-text h2{
-
-        font-size:55px;
+    .flag{
+        display:none;
     }
 
-    footer{
+    .hero h1{
+        font-size:85px;
 
-        flex-direction:column;
+        letter-spacing:-6px;
+    }
 
-        align-items:flex-start;
+    .gallery{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .photo:nth-child(n){
+
+        grid-column:auto;
+
+        height:280px;
+
+    }
+
+    .section{
+
+        padding:
+            90px 18px;
+    }
+
+    .spotify-card{
+
+        padding:15px;
+
+    }
+
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+.particle{
+
+    position:fixed;
+
+    width:3px;
+    height:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    opacity:.25;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    animation:
+        particleUp linear infinite;
+
+}
+
+@keyframes particleUp{
+
+    from{
+
+        transform:
+            translateY(0);
+
+        opacity:0;
+
+    }
+
+    20%{
+        opacity:.4;
+    }
+
+    80%{
+        opacity:.3;
+    }
+
+    to{
+
+        transform:
+            translateY(-120px);
+
+        opacity:0;
+
     }
 
 }
@@ -1092,32 +1053,19 @@ footer p{
 <body>
 
 
-<!-- PARTICLES -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<div id="particles"></div>
-
-
-<!-- NAVBAR -->
-
-<nav id="navbar">
+<header class="navbar">
 
     <a href="#home" class="logo">
-        9<span>F.</span>
+        <span>9</span>F
     </a>
 
-    <button
-        class="menu"
-        id="menu"
-    >
-        ☰
-    </button>
+    <nav class="nav-links">
 
-    <div
-        class="nav-links"
-        id="navLinks"
-    >
-
-        <a href="#home">
+        <a href="#home" class="active">
             Home
         </a>
 
@@ -1129,80 +1077,65 @@ footer p{
             Playlist
         </a>
 
+    </nav>
+
+    <div class="flag">
+
+        <div class="red"></div>
+
+        <div class="white"></div>
+
     </div>
 
-</nav>
+</header>
 
 
 <!-- =========================
      HOME
 ========================= -->
 
-<section
-    class="hero"
-    id="home"
->
+<section id="home" class="hero">
 
-    <div class="hero-content">
+    <div class="hero-text">
 
-        <div class="small-title">
-
-            🇮🇩 DIRGAHAYU
-            REPUBLIK INDONESIA 🇮🇩
-
+        <div class="badge">
+            🇮🇩 SEMANGAT KEMERDEKAAN
         </div>
 
         <h1>
-
-            Kelas
-            <span class="red">
-                9F
-            </span>
-
+            CLASS
             <br>
-
-            <span class="thin">
-                Semangat.
-            </span>
-
-            <br>
-
-            Solid.
-            <span class="red">
-                Merdeka.
-            </span>
-
+            <span>9F</span>
         </h1>
+
+        <h2>
+            Satu kelas.
+            Satu cerita.
+            <span>Satu semangat.</span>
+        </h2>
 
         <p class="hero-description">
 
-            Satu kelas.
-            Satu perjuangan.
-            Satu semangat.
-
-            Bersama 9F, kita berikan
-            yang terbaik untuk lomba
-            17 Agustus.
+            Selamat datang di website kelas 9F.
+            Tempat menyimpan cerita, kebersamaan,
+            foto, musik, dan semangat kita dalam
+            menyambut 17 Agustus.
 
         </p>
 
         <div class="buttons">
 
-            <a
-                href="#galeri"
-                class="button red"
-            >
+            <a href="#galeri"
+               class="btn btn-red">
 
-                LIHAT GALERI →
+                Lihat Galeri ↓
 
             </a>
 
-            <a
-                href="#playlist"
-                class="button outline"
-            >
+            <a href="#playlist"
+               class="btn btn-outline">
 
-                ▶ PLAYLIST
+                Playlist 9F ♪
 
             </a>
 
@@ -1211,258 +1144,330 @@ footer p{
     </div>
 
 
-    <div class="big-nine">
-        9F
+    <div class="hero-card">
+
+        <div class="card-number">
+
+            <span>17</span>
+
+            <span>08</span>
+
+        </div>
+
+        <div class="indonesia">
+
+            <div class="r"></div>
+
+            <div class="w"></div>
+
+        </div>
+
+        <h3>
+            MERDEKA!
+        </h3>
+
+        <div class="card-bottom">
+            9F • INDONESIA
+        </div>
+
     </div>
 
 </section>
-
-
-<!-- MARQUEE -->
-
-<div class="marquee">
-
-    <div class="marquee-content">
-
-        🇮🇩 MERDEKA •
-        9F BERANI •
-        9F KOMPAK •
-        9F SOLID •
-        INDONESIA TANGGUH •
-
-        🇮🇩 MERDEKA •
-        9F BERANI •
-        9F KOMPAK •
-        9F SOLID •
-
-    </div>
-
-</div>
 
 
 <!-- =========================
-     TENTANG
+     DIVIDER
 ========================= -->
 
-<section class="about">
+<div class="divider">
 
-    <div class="section-label">
-        TENTANG 9F
-    </div>
+    <span>
+        🇮🇩 9F • MERDEKA • BERSAMA • KOMPAK • BERANI •
+        9F • MERDEKA • BERSAMA • KOMPAK • BERANI •
+        🇮🇩 9F • MERDEKA • BERSAMA • KOMPAK • BERANI •
+    </span>
 
-    <h2 class="section-title reveal">
-
-        Bukan sekadar
-        <span>
-            kelas.
-        </span>
-
-    </h2>
-
-
-    <div class="about-grid">
-
-
-        <div class="about-card red reveal">
-
-            <div>
-                01
-            </div>
-
-            <h3>
-
-                Semangat
-                <br>
-                17 Agustus
-
-            </h3>
-
-            <p>
-
-                Merayakan kemerdekaan
-                dengan kebersamaan,
-                kreativitas, sportivitas,
-                dan semangat pantang
-                menyerah.
-
-            </p>
-
-        </div>
-
-
-        <div class="about-card reveal">
-
-            <div class="about-icon">
-                ⚡
-            </div>
-
-            <h3>
-                Berani
-            </h3>
-
-            <p>
-
-                Berani tampil,
-                berani mencoba,
-                dan berani memberikan
-                yang terbaik.
-
-            </p>
-
-        </div>
-
-
-        <div class="about-card black reveal">
-
-            <div class="about-icon">
-                🤝
-            </div>
-
-            <h3>
-                Kompak
-            </h3>
-
-            <p>
-
-                Kemenangan terasa
-                lebih seru ketika
-                diraih bersama-sama.
-
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
+</div>
 
 
 <!-- =========================
      GALERI
 ========================= -->
 
-<section
-    class="gallery"
-    id="galeri"
->
+<section id="galeri" class="section">
 
-    <div class="section-label">
-        MOMEN 9F
+    <div class="section-title">
+
+        <small>
+            OUR MEMORIES
+        </small>
+
+        <h2>
+            Galeri
+            <span>9F</span>
+        </h2>
+
+        <p>
+            18 foto untuk 18 cerita kebersamaan.
+        </p>
+
     </div>
 
-    <h2 class="section-title reveal">
 
-        Galeri
-        <span>
-            Perjuangan.
-        </span>
+    <div class="gallery" id="gallery">
 
-    </h2>
+        <!--
+        FOTO 1
+        -->
 
+        <button class="photo">
 
-    <div class="gallery-grid">
+            <img src="images/1.jpg"
+                 alt="Foto kelas 9F 1">
 
+            <span class="photo-number">
+                01
+            </span>
 
-        <div
-            class="gallery-item reveal"
-            data-image="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1600&q=90"
-        >
-
-            <div class="gallery-text">
-
-                <small>
-                    01
-                </small>
-
-                <h3>
-                    Persiapan
-                </h3>
-
-            </div>
-
-        </div>
+        </button>
 
 
-        <div
-            class="gallery-item reveal"
-            data-image="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=90"
-        >
+        <!-- FOTO 2 -->
 
-            <div class="gallery-text">
+        <button class="photo">
 
-                <small>
-                    02
-                </small>
+            <img src="images/2.jpg"
+                 alt="Foto kelas 9F 2">
 
-                <h3>
-                    Kebersamaan
-                </h3>
+            <span class="photo-number">
+                02
+            </span>
 
-            </div>
-
-        </div>
+        </button>
 
 
-        <div
-            class="gallery-item reveal"
-            data-image="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=90"
-        >
+        <!-- FOTO 3 -->
 
-            <div class="gallery-text">
+        <button class="photo">
 
-                <small>
-                    03
-                </small>
+            <img src="images/3.jpg"
+                 alt="Foto kelas 9F 3">
 
-                <h3>
-                    Semangat
-                </h3>
+            <span class="photo-number">
+                03
+            </span>
 
-            </div>
-
-        </div>
+        </button>
 
 
-        <div
-            class="gallery-item reveal"
-            data-image="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1600&q=90"
-        >
+        <!-- FOTO 4 -->
 
-            <div class="gallery-text">
+        <button class="photo">
 
-                <small>
-                    04
-                </small>
+            <img src="images/4.jpg"
+                 alt="Foto kelas 9F 4">
 
-                <h3>
-                    17 Agustus
-                </h3>
+            <span class="photo-number">
+                04
+            </span>
 
-            </div>
-
-        </div>
+        </button>
 
 
-        <div
-            class="gallery-item reveal"
-            data-image="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1600&q=90"
-        >
+        <!-- FOTO 5 -->
 
-            <div class="gallery-text">
+        <button class="photo">
 
-                <small>
-                    05
-                </small>
+            <img src="images/5.jpg"
+                 alt="Foto kelas 9F 5">
 
-                <h3>
-                    9F Solid
-                </h3>
+            <span class="photo-number">
+                05
+            </span>
 
-            </div>
+        </button>
 
-        </div>
 
+        <!-- FOTO 6 -->
+
+        <button class="photo">
+
+            <img src="images/6.jpg"
+                 alt="Foto kelas 9F 6">
+
+            <span class="photo-number">
+                06
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 7 -->
+
+        <button class="photo">
+
+            <img src="images/7.jpg"
+                 alt="Foto kelas 9F 7">
+
+            <span class="photo-number">
+                07
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 8 -->
+
+        <button class="photo">
+
+            <img src="images/8.jpg"
+                 alt="Foto kelas 9F 8">
+
+            <span class="photo-number">
+                08
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 9 -->
+
+        <button class="photo">
+
+            <img src="images/9.jpg"
+                 alt="Foto kelas 9F 9">
+
+            <span class="photo-number">
+                09
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 10 -->
+
+        <button class="photo">
+
+            <img src="images/10.jpg"
+                 alt="Foto kelas 9F 10">
+
+            <span class="photo-number">
+                10
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 11 -->
+
+        <button class="photo">
+
+            <img src="images/11.jpg"
+                 alt="Foto kelas 9F 11">
+
+            <span class="photo-number">
+                11
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 12 -->
+
+        <button class="photo">
+
+            <img src="images/12.jpg"
+                 alt="Foto kelas 9F 12">
+
+            <span class="photo-number">
+                12
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 13 -->
+
+        <button class="photo">
+
+            <img src="images/13.jpg"
+                 alt="Foto kelas 9F 13">
+
+            <span class="photo-number">
+                13
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 14 -->
+
+        <button class="photo">
+
+            <img src="images/14.jpg"
+                 alt="Foto kelas 9F 14">
+
+            <span class="photo-number">
+                14
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 15 -->
+
+        <button class="photo">
+
+            <img src="images/15.jpg"
+                 alt="Foto kelas 9F 15">
+
+            <span class="photo-number">
+                15
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 16 -->
+
+        <button class="photo">
+
+            <img src="images/16.jpg"
+                 alt="Foto kelas 9F 16">
+
+            <span class="photo-number">
+                16
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 17 -->
+
+        <button class="photo">
+
+            <img src="images/17.jpg"
+                 alt="Foto kelas 9F 17">
+
+            <span class="photo-number">
+                17
+            </span>
+
+        </button>
+
+
+        <!-- FOTO 18 -->
+
+        <button class="photo">
+
+            <img src="images/18.jpg"
+                 alt="Foto kelas 9F 18">
+
+            <span class="photo-number">
+                18
+            </span>
+
+        </button>
 
     </div>
 
@@ -1470,94 +1475,70 @@ footer p{
 
 
 <!-- =========================
-     LIGHTBOX
-========================= -->
-
-<div
-    class="lightbox"
-    id="lightbox"
->
-
-    <button
-        class="close"
-        id="close"
-    >
-        ×
-    </button>
-
-    <img
-        id="lightboxImg"
-        src=""
-        alt="Foto kelas 9F"
-    >
-
-</div>
-
-
-<!-- =========================
      PLAYLIST
 ========================= -->
 
-<section
-    class="playlist"
-    id="playlist"
->
+<section id="playlist" class="section">
 
-    <div class="playlist-box">
+    <div class="section-title">
+
+        <small>
+            CLASS PLAYLIST
+        </small>
+
+        <h2>
+            Playlist
+            <span>9F</span>
+        </h2>
+
+        <p>
+            Musik pilihan untuk menemani cerita kelas.
+        </p>
+
+    </div>
 
 
-        <div class="vinyl">
+    <div class="spotify-card">
 
-            <span>
-                9F
-            </span>
+        <div class="music-info">
 
-        </div>
-
-
-        <div class="playlist-text">
-
-            <div class="section-label">
-
-                SOUNDTRACK 9F
-
+            <div class="music-icon">
+                ♪
             </div>
 
-            <h2>
-
-                Playlist
-                <br>
-
-                <span>
-                    Semangat.
-                </span>
-
-            </h2>
+            <h3>
+                Playlist 9F
+            </h3>
 
             <p>
 
-                Putar playlist pilihan
-                kelas 9F dan nikmati
-                musik sambil merayakan
-                semangat kemerdekaan.
+                Dengarkan playlist Spotify
+                kelas 9F sambil menikmati
+                kenangan kita.
 
             </p>
 
-
-            <!-- PLAYLIST SPOTIFY KAMU -->
-
             <a
-                class="spotify"
-                href="https://open.spotify.com/playlist/2trxdNXt3IPF10skOMox8A?si=qmaMws2PQdapq45TeSNyxQ&utm_source=whatsapp&pi=UuR4Q5nxS1C09&sci=spotify%3Acard-config%3A5XZh3hcDuQ0ibbHAQNyLkx"
+                class="btn btn-red"
                 target="_blank"
-                rel="noopener noreferrer"
-            >
+                href="https://open.spotify.com/playlist/2trxdNXt3IPF10skOMox8A?si=qmaMws2PQdapq45TeSNyxQ&utm_source=whatsapp&pi=UuR4Q5nxS1C09&sci=spotify%3Acard-config%3A5XZh3hcDuQ0ibbHAQNyLkx">
 
-                🎵 BUKA PLAYLIST 9F →
+                Buka Spotify ↗
 
             </a>
 
         </div>
+
+
+        <iframe
+
+            src="https://open.spotify.com/embed/playlist/2trxdNXt3IPF10skOMox8A?utm_source=generator"
+
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+
+            loading="lazy">
+
+        </iframe>
 
     </div>
 
@@ -1572,353 +1553,330 @@ footer p{
 
     <div class="footer-logo">
 
-        9<span>F.</span>
+        9<span>F</span>
 
     </div>
 
     <p>
-
-        © 2026 Kelas 9F
-        • Semangat Indonesia 🇮🇩
-
+        Dibuat dengan ❤️ untuk kelas 9F
     </p>
 
-    <button id="semangat">
-
-        🇮🇩 NYALAKAN SEMANGAT
-
-    </button>
+    <strong>
+        🇮🇩 MERDEKA BERSAMA 🇮🇩
+    </strong>
 
 </footer>
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div class="lightbox" id="lightbox">
+
+    <button class="close">
+        ×
+    </button>
+
+    <button class="prev">
+        ‹
+    </button>
+
+    <img
+        id="lightboxImage"
+        alt="Foto kelas 9F">
+
+    <button class="next">
+        ›
+    </button>
+
+    <div class="counter"
+         id="counter">
+    </div>
+
+</div>
 
 
 <script>
 
 /* =========================
-   MENU HP
+   GALERI
 ========================= */
 
-const menu =
-document.getElementById("menu");
+const photos =
+document.querySelectorAll(".photo");
 
-const navLinks =
-document.getElementById("navLinks");
+const lightbox =
+document.getElementById("lightbox");
 
-menu.onclick = () => {
+const lightboxImage =
+document.getElementById("lightboxImage");
 
-    navLinks.classList.toggle(
-        "open"
-    );
+const counter =
+document.getElementById("counter");
 
-};
+let currentPhoto = 0;
 
+
+/* OPEN FOTO */
+
+photos.forEach((photo,index)=>{
+
+    photo.addEventListener("click",()=>{
+
+        currentPhoto = index;
+
+        showPhoto();
+
+    });
+
+});
+
+
+function showPhoto(){
+
+    lightboxImage.src =
+        `images/${currentPhoto + 1}.jpg`;
+
+    counter.textContent =
+        `${currentPhoto + 1} / 18`;
+
+    lightbox.classList.add("show");
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* CLOSE */
 
 document
-.querySelectorAll(".nav-links a")
-.forEach(link => {
+.querySelector(".close")
+.addEventListener("click",()=>{
 
-    link.onclick = () => {
+    lightbox.classList.remove("show");
 
-        navLinks.classList.remove(
-            "open"
-        );
+    document.body.style.overflow =
+        "";
 
-    };
+});
+
+
+/* NEXT */
+
+document
+.querySelector(".next")
+.addEventListener("click",()=>{
+
+    currentPhoto++;
+
+    if(currentPhoto >= 18){
+        currentPhoto = 0;
+    }
+
+    showPhoto();
+
+});
+
+
+/* PREVIOUS */
+
+document
+.querySelector(".prev")
+.addEventListener("click",()=>{
+
+    currentPhoto--;
+
+    if(currentPhoto < 0){
+        currentPhoto = 17;
+    }
+
+    showPhoto();
+
+});
+
+
+/* CLICK OUTSIDE */
+
+lightbox.addEventListener("click",(e)=>{
+
+    if(e.target === lightbox){
+
+        lightbox.classList.remove("show");
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+});
+
+
+/* KEYBOARD */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(!lightbox.classList.contains("show")){
+        return;
+    }
+
+    if(e.key === "Escape"){
+
+        lightbox.classList.remove("show");
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+    if(e.key === "ArrowRight"){
+
+        currentPhoto++;
+
+        if(currentPhoto >= 18){
+            currentPhoto = 0;
+        }
+
+        showPhoto();
+
+    }
+
+    if(e.key === "ArrowLeft"){
+
+        currentPhoto--;
+
+        if(currentPhoto < 0){
+            currentPhoto = 17;
+        }
+
+        showPhoto();
+
+    }
 
 });
 
 
 /* =========================
-   NAVBAR
+   GALERI ANIMATION
 ========================= */
 
-const navbar =
-document.getElementById("navbar");
+const galleryObserver =
+new IntersectionObserver(
 
-window.addEventListener(
-    "scroll",
-    () => {
+    entries=>{
 
-        navbar.classList.toggle(
-            "scrolled",
-            window.scrollY > 40
-        );
+        entries.forEach((entry,index)=>{
 
+            if(entry.isIntersecting){
+
+                setTimeout(()=>{
+
+                    entry.target.classList.add("show");
+
+                },index * 80);
+
+                galleryObserver.unobserve(
+                    entry.target
+                );
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold:.1
     }
+
 );
+
+
+photos.forEach(photo=>{
+
+    galleryObserver.observe(photo);
+
+});
+
+
+/* =========================
+   NAV ACTIVE
+========================= */
+
+const sections =
+document.querySelectorAll("section[id]");
+
+const navLinks =
+document.querySelectorAll(".nav-links a");
+
+
+window.addEventListener("scroll",()=>{
+
+    let current = "home";
+
+    sections.forEach(section=>{
+
+        const top =
+            section.offsetTop - 200;
+
+        if(window.scrollY >= top){
+
+            current =
+                section.getAttribute("id");
+
+        }
+
+    });
+
+
+    navLinks.forEach(link=>{
+
+        link.classList.remove("active");
+
+        if(
+            link.getAttribute("href")
+            === "#" + current
+        ){
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
 
 
 /* =========================
    PARTICLES
 ========================= */
 
-const particles =
-document.getElementById(
-    "particles"
-);
-
-for(
-    let i = 0;
-    i < 35;
-    i++
-){
+for(let i=0;i<30;i++){
 
     const particle =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
     particle.className =
         "particle";
 
     particle.style.left =
-        Math.random() * 100 +
-        "%";
+        Math.random()*100 + "vw";
+
+    particle.style.top =
+        Math.random()*100 + "vh";
 
     particle.style.animationDuration =
-        8 +
-        Math.random() * 12 +
-        "s";
+        (5 + Math.random()*8) + "s";
 
     particle.style.animationDelay =
-        -Math.random() * 15 +
-        "s";
+        Math.random()*5 + "s";
 
-    particles.appendChild(
+    document.body.appendChild(
         particle
     );
 
 }
-
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-
-const observer =
-new IntersectionObserver(
-
-    entries => {
-
-        entries.forEach(
-            entry => {
-
-                if(
-                    entry.isIntersecting
-                ){
-
-                    entry.target
-                        .classList
-                        .add("show");
-
-                }
-
-            }
-        );
-
-    },
-
-    {
-        threshold:.12
-    }
-
-);
-
-
-document
-.querySelectorAll(".reveal")
-.forEach(
-    element =>
-    observer.observe(element)
-);
-
-
-/* =========================
-   LIGHTBOX
-========================= */
-
-const lightbox =
-document.getElementById(
-    "lightbox"
-);
-
-const lightboxImg =
-document.getElementById(
-    "lightboxImg"
-);
-
-
-document
-.querySelectorAll(".gallery-item")
-.forEach(item => {
-
-    item.addEventListener(
-        "click",
-        () => {
-
-            lightboxImg.src =
-                item.dataset.image;
-
-            lightbox.classList.add(
-                "open"
-            );
-
-        }
-    );
-
-});
-
-
-document
-.getElementById("close")
-.onclick = () => {
-
-    lightbox.classList.remove(
-        "open"
-    );
-
-};
-
-
-lightbox.addEventListener(
-    "click",
-    event => {
-
-        if(
-            event.target ===
-            lightbox
-        ){
-
-            lightbox.classList.remove(
-                "open"
-            );
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if(
-            event.key === "Escape"
-        ){
-
-            lightbox.classList.remove(
-                "open"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================
-   TOMBOL SEMANGAT
-========================= */
-
-document
-.getElementById("semangat")
-.onclick = () => {
-
-    const emoji = [
-        "🇮🇩",
-        "🔥",
-        "🎉",
-        "⭐"
-    ];
-
-
-    for(
-        let i = 0;
-        i < 20;
-        i++
-    ){
-
-        const element =
-            document.createElement(
-                "div"
-            );
-
-        element.textContent =
-            emoji[
-                Math.floor(
-                    Math.random() *
-                    emoji.length
-                )
-            ];
-
-
-        element.style.position =
-            "fixed";
-
-        element.style.left =
-            Math.random() *
-            100 +
-            "vw";
-
-        element.style.bottom =
-            "20px";
-
-        element.style.fontSize =
-            20 +
-            Math.random() *
-            25 +
-            "px";
-
-        element.style.zIndex =
-            "9999";
-
-        element.style.pointerEvents =
-            "none";
-
-        element.style.transition =
-            "1.5s";
-
-
-        document.body.appendChild(
-            element
-        );
-
-
-        setTimeout(
-            () => {
-
-                element.style.transform =
-                    `translateY(-${
-                        300 +
-                        Math.random() *
-                        400
-                    }px)
-                    rotate(${
-                        Math.random() *
-                        360
-                    }deg)`;
-
-                element.style.opacity =
-                    "0";
-
-            },
-            50
-        );
-
-
-        setTimeout(
-            () => {
-
-                element.remove();
-
-            },
-            1600
-        );
-
-    }
-
-};
 
 </script>
 
