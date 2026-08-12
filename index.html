@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ZOO EXPLORER | Wild Safari 🦁</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* =========================
+   RESET & GLOBAL
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:#0b130e;
+    color:#e2ebe4;
+    overflow-x:hidden;
+}
+
+/* =========================
+   BACKGROUND GLOW (NATURE VIBES)
+========================= */
+body::before{
+    content:"";
+    position:fixed;
+    width:550px;
+    height:550px;
+    border-radius:50%;
+    background:rgba(34, 139, 34, 0.18);
+    filter:blur(130px);
+    top:-200px;
+    left:-150px;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(212, 175, 55, 0.12);
+    filter:blur(130px);
+    right:-200px;
+    bottom:-150px;
+    z-index:-2;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1100px,92%);
+    height:65px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    background:rgba(18, 30, 22, 0.75);
+    backdrop-filter:blur(20px);
+    z-index:999;
+    box-shadow:0 15px 50px rgba(0,0,0,.5);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:-1px;
+    color:white;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.logo span{
+    color:#52b788;
+}
+
+.nav-links{
+    display:flex;
+    gap:5px;
+}
+
+.nav-links a{
+    color:#a3b18a;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    padding:10px 16px;
+    border-radius:12px;
+    transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:white;
+    background:#2d6a4f;
+}
+
+.nav-badge{
+    background:rgba(82, 183, 136, 0.2);
+    border:1px solid rgba(82, 183, 136, 0.4);
+    color:#74c69d;
+    padding:6px 12px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:700;
+}
+
+/* =========================
+   HERO / HOME
+========================= */
+.hero{
+    min-height:100vh;
+    max-width:1200px;
+    margin:auto;
+    padding:150px 30px 90px;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    align-items:center;
+    gap:70px;
+}
+
+.hero-text{
+    animation:fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 16px;
+    border-radius:50px;
+    color:#74c69d;
+    background:rgba(45, 106, 79, 0.25);
+    border:1px solid rgba(82, 183, 136, 0.3);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.5px;
+}
+
+.hero h1{
+    margin-top:25px;
+    font-size:clamp(60px,10vw,120px);
+    line-height:.88;
+    letter-spacing:-4px;
+    font-weight:900;
+}
+
+.hero h1 span{
+    color:#52b788;
+    text-shadow:0 0 50px rgba(82, 183, 136, 0.35);
+}
+
+.hero h2{
+    margin-top:30px;
+    font-size:clamp(22px,3vw,36px);
+    line-height:1.2;
+}
+
+.hero h2 span{
+    color:#d4af37;
+}
+
+.hero-description{
+    margin-top:18px;
+    max-width:600px;
+    color:#94a398;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:28px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 22px;
+    border-radius:14px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.btn-green{
+    color:white;
+    background:#2d6a4f;
+    box-shadow:0 12px 35px rgba(45, 106, 79, 0.4);
+}
+
+.btn-green:hover{
+    transform:translateY(-4px);
+    background:#40916c;
+    box-shadow:0 20px 45px rgba(45, 106, 79, 0.6);
+}
+
+.btn-outline{
+    color:white;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.btn-outline:hover{
+    background:white;
+    color:black;
+}
+
+/* =========================
+   HERO CARD
+========================= */
+.hero-card{
+    width:310px;
+    height:420px;
+    justify-self:center;
+    padding:25px;
+    border-radius:30px;
+    background:linear-gradient(145deg, #182d21, #0c1811);
+    border:1px solid rgba(82, 183, 136, 0.2);
+    box-shadow:0 35px 90px rgba(0,0,0,.7);
+    transform:rotate(4deg);
+    animation:float 4s ease-in-out infinite;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    text-align:center;
+}
+
+.hero-card::before{
+    content:"";
+    position:absolute;
+    width:200px;
+    height:200px;
+    background:#52b788;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.2;
+    top:-80px;
+    right:-80px;
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    font-weight:800;
+    color:#74c69d;
+    letter-spacing:1px;
+}
+
+.card-icon{
+    font-size:90px;
+    margin:20px 0;
+    filter:drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+}
+
+.hero-card h3{
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:1px;
+    color:#d4af37;
+}
+
+.card-bottom{
+    color:#748c7c;
+    font-size:11px;
+    font-weight:600;
+}
+
+/* =========================
+   DIVIDER RUNNING TEXT
+========================= */
+.divider{
+    padding:18px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    overflow:hidden;
+    white-space:nowrap;
+    color:#52b788;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:2px;
+    background:rgba(18, 30, 22, 0.4);
+}
+
+.divider span{
+    display:inline-block;
+    animation:moveText 20s linear infinite;
+}
+
+/* =========================
+   SECTION GENERAL
+========================= */
+.section{
+    max-width:1200px;
+    margin:auto;
+    padding:120px 30px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title small{
+    color:#d4af37;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.section-title h2{
+    margin-top:8px;
+    font-size:clamp(42px,6vw,70px);
+    letter-spacing:-2px;
+}
+
+.section-title h2 span{
+    color:#52b788;
+}
+
+.section-title p{
+    margin-top:10px;
+    color:#8fa396;
+    font-size:14px;
+}
+
+/* =========================
+   UNIFORM GALERI (BERANIMASI & ELEGAN)
+========================= */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+}
+
+.photo{
+    position:relative;
+    width:100%;
+    aspect-ratio:4 / 3;
+    overflow:hidden;
+    border-radius:24px;
+    background:#121e16;
+    border:1px solid rgba(255,255,255,.08);
+    padding:0;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(35px) scale(0.96);
+    transition:
+        opacity .7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform .5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color .4s,
+        box-shadow .4s;
+}
+
+.photo.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
+.photo:hover{
+    transform:translateY(-10px) scale(1.02) !important;
+    border-color:rgba(82, 183, 136, 0.7);
+    box-shadow:0 20px 40px rgba(45, 106, 79, 0.35);
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    transition:transform .7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo:hover img{
+    transform:scale(1.1);
+}
+
+/* OVERLAY & SHIMMER EFFECT */
+.photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(5, 20, 10, 0.85) 100%);
+    pointer-events:none;
+}
+
+.photo::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform:skewX(-25deg);
+    transition:left .75s ease;
+    z-index:2;
+    pointer-events:none;
+}
+
+.photo:hover::before{
+    left:150%;
+}
+
+.photo-number{
+    position:absolute;
+    z-index:3;
+    bottom:15px;
+    left:18px;
+    font-size:12px;
+    font-weight:800;
+    color:white;
+    letter-spacing:1px;
+    background:rgba(12, 24, 16, 0.65);
+    backdrop-filter:blur(10px);
+    padding:5px 14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.15);
+    transition:background .3s, border-color .3s, transform .3s;
+}
+
+.photo:hover .photo-number{
+    background:#2d6a4f;
+    border-color:#52b788;
+    transform:scale(1.08);
+}
+
+/* =========================
+   PLAYLIST SPOTIFY
+========================= */
+.spotify-card{
+    max-width:950px;
+    margin:auto;
+    padding:25px;
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:25px;
+    border-radius:28px;
+    border:1px solid rgba(82, 183, 136, 0.2);
+    background:linear-gradient(145deg, #132419, #0a130d);
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+
+.music-info{
+    padding:15px;
+}
+
+.music-icon{
+    width:75px;
+    height:75px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#1ed760;
+    color:#000;
+    font-size:32px;
+    font-weight:900;
+    box-shadow:0 12px 40px rgba(30,215,96,.25);
+    animation:spin 6s linear infinite;
+}
+
+.music-info h3{
+    font-size:26px;
+    margin-top:25px;
+    color:white;
+}
+
+.music-info p{
+    color:#94a398;
+    font-size:13px;
+    line-height:1.7;
+    margin:8px 0 22px;
+}
+
+.spotify-card iframe{
+    width:100%;
+    height:352px;
+    border:0;
+    border-radius:18px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+    text-align:center;
+    padding:80px 20px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#748c7c;
+}
+
+.footer-logo{
+    font-size:40px;
+    font-weight:900;
+    color:white;
+}
+
+.footer-logo span{
+    color:#52b788;
+}
+
+footer p{
+    font-size:12px;
+    margin:8px 0 18px;
+}
+
+footer strong{
+    color:#d4af37;
+}
+
+/* =========================
+   LIGHTBOX MODAL
+========================= */
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(5, 12, 7, 0.94);
+    backdrop-filter:blur(15px);
+    z-index:2000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .4s ease;
+}
+
+.lightbox.show{
+    opacity:1;
+    pointer-events:all;
+}
+
+.lightbox img{
+    max-width:90vw;
+    max-height:82vh;
+    object-fit:contain;
+    border-radius:20px;
+    box-shadow:0 30px 100px rgba(0,0,0,.9);
+    transform:scale(0.85);
+    transition:transform .4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox.show img{
+    transform:scale(1);
+}
+
+.close, .prev, .next{
+    position:fixed;
+    width:50px;
+    height:50px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.15);
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+    z-index:5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+}
+
+.close:hover, .prev:hover, .next:hover{
+    background:#2d6a4f;
+    border-color:#52b788;
+    transform:scale(1.1);
+}
+
+.close{ top:25px; right:25px; }
+.prev{ left:25px; }
+.next{ right:25px; }
+
+.counter{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#a3b18a;
+    font-size:13px;
+    background:rgba(18, 30, 22, 0.85);
+    padding:6px 16px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+/* =========================
+   KEYFRAMES
+========================= */
+@keyframes fadeUp{
+    from{ opacity:0; transform:translateY(35px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+@keyframes float{
+    0%,100%{ transform:rotate(4deg) translateY(0); }
+    50%{ transform:rotate(1deg) translateY(-18px); }
+}
+
+@keyframes spin{
+    to{ transform:rotate(360deg); }
+}
+
+@keyframes moveText{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+}
+
+/* =========================
+   RESPONSIVE / MOBILE
+========================= */
+@media(max-width:900px){
+    .gallery{ grid-template-columns:repeat(2, 1fr); gap:15px; }
+}
+
+@media(max-width:850px){
+    .navbar{ height:58px; }
+    .nav-links a{ font-size:11px; padding:8px 9px; }
+    .hero{ grid-template-columns:1fr; text-align:center; padding-top:130px; gap:70px; }
+    .hero-description{ margin-left:auto; margin-right:auto; }
+    .buttons{ justify-content:center; }
+    .hero-card{ width:260px; height:360px; }
+    .spotify-card{ grid-template-columns:1fr; }
+}
+
+@media(max-width:550px){
+    .logo{ font-size:20px; }
+    .nav-badge{ display:none; }
+    .hero h1{ font-size:65px; letter-spacing:-2px; }
+    .gallery{ grid-template-columns:1fr; gap:12px; }
+    .section{ padding:90px 18px; }
+    .spotify-card{ padding:15px; }
+}
+
+/* =========================
+   PARTIKEL DAUN MELAYANG
+========================= */
+.particle{
+    position:fixed;
+    width:4px;
+    height:4px;
+    background:#52b788;
+    border-radius:50%;
+    opacity:.3;
+    pointer-events:none;
+    z-index:-1;
+    animation:particleUp linear infinite;
+}
+
+@keyframes particleUp{
+    from{ transform:translateY(0) rotate(0deg); opacity:0; }
+    20%{ opacity:.4; }
+    80%{ opacity:.3; }
+    to{ transform:translateY(-120px) rotate(360deg); opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <a href="#home" class="logo">
+        🦁 ZOO<span>EXPLORER</span>
+    </a>
+    <nav class="nav-links">
+        <a href="#home" class="active">Utama</a>
+        <a href="#galeri">Satwa</a>
+        <a href="#playlist">Soundtrack</a>
+    </nav>
+    <div class="nav-badge">🌿 SAFARI</div>
+</header>
+
+<!-- HOME / HERO -->
+<section id="home" class="hero">
+    <div class="hero-text">
+        <div class="badge">
+            🌴 WILDLIFE SAFARI EXPERIENCE
+        </div>
+        <h1>
+            WILD<br>
+            <span>SAFARI</span>
+        </h1>
+        <h2>
+            Jelajahi Pesona<br>
+            <span>Dunia Satwa.</span>
+        </h2>
+        <p class="hero-description">
+            Selamat datang di galeri petualangan kebun binatang. Temukan momen keindahan alam, keberagaman flora dan fauna, serta keajaiban dunia satwa.
+        </p>
+        <div class="buttons">
+            <a href="#galeri" class="btn btn-green">Lihat Satwa ↓</a>
+            <a href="#playlist" class="btn btn-outline">Safari Sound ♪</a>
+        </div>
+    </div>
+
+    <div class="hero-card">
+        <div class="card-top">
+            <span>ZOO</span>
+            <span>PARK</span>
+        </div>
+        <div class="card-icon">🦁</div>
+        <div>
+            <h3>KINGDOM</h3>
+            <div class="card-bottom">WILDLIFE RESERVED</div>
+        </div>
+    </div>
+</section>
+
+<!-- DIVIDER RUNNING TEXT -->
+<div class="divider">
+    <span>
+        🌿 ZOO SAFARI • JUNGLE EXPLORER • WILDLIFE • NATURE & ANIMALS • 
+        🌿 ZOO SAFARI • JUNGLE EXPLORER • WILDLIFE • NATURE & ANIMALS • 
+        🌿 ZOO SAFARI • JUNGLE EXPLORER • WILDLIFE • NATURE & ANIMALS • 
+    </span>
+</div>
+
+<!-- GALERI SATWA (18 FOTO) -->
+<section id="galeri" class="section">
+    <div class="section-title">
+        <small>SAFARI COLLECTION</small>
+        <h2>Galeri <span>Satwa</span></h2>
+        <p>18 momen petualangan menakjubkan di dunia kebun binatang.</p>
+    </div>
+
+    <div class="gallery" id="gallery">
+        <button class="photo"><img src="photo/1.jpg" alt="Satwa 1" loading="lazy"><span class="photo-number">01 • SAFARI</span></button>
+        <button class="photo"><img src="photo/2.jpg" alt="Satwa 2" loading="lazy"><span class="photo-number">02 • SAFARI</span></button>
+        <button class="photo"><img src="photo/3.jpg" alt="Satwa 3" loading="lazy"><span class="photo-number">03 • SAFARI</span></button>
+        <button class="photo"><img src="photo/4.jpg" alt="Satwa 4" loading="lazy"><span class="photo-number">04 • SAFARI</span></button>
+        <button class="photo"><img src="photo/5.jpg" alt="Satwa 5" loading="lazy"><span class="photo-number">05 • SAFARI</span></button>
+        <button class="photo"><img src="photo/6.jpg" alt="Satwa 6" loading="lazy"><span class="photo-number">06 • SAFARI</span></button>
+        <button class="photo"><img src="photo/7.jpg" alt="Satwa 7" loading="lazy"><span class="photo-number">07 • SAFARI</span></button>
+        <button class="photo"><img src="photo/8.jpg" alt="Satwa 8" loading="lazy"><span class="photo-number">08 • SAFARI</span></button>
+        <button class="photo"><img src="photo/9.jpg" alt="Satwa 9" loading="lazy"><span class="photo-number">09 • SAFARI</span></button>
+        <button class="photo"><img src="photo/10.jpg" alt="Satwa 10" loading="lazy"><span class="photo-number">10 • SAFARI</span></button>
+        <button class="photo"><img src="photo/11.jpg" alt="Satwa 11" loading="lazy"><span class="photo-number">11 • SAFARI</span></button>
+        <button class="photo"><img src="photo/12.jpg" alt="Satwa 12" loading="lazy"><span class="photo-number">12 • SAFARI</span></button>
+        <button class="photo"><img src="photo/13.jpg" alt="Satwa 13" loading="lazy"><span class="photo-number">13 • SAFARI</span></button>
+        <button class="photo"><img src="photo/14.jpg" alt="Satwa 14" loading="lazy"><span class="photo-number">14 • SAFARI</span></button>
+        <button class="photo"><img src="photo/15.jpg" alt="Satwa 15" loading="lazy"><span class="photo-number">15 • SAFARI</span></button>
+        <button class="photo"><img src="photo/16.jpg" alt="Satwa 16" loading="lazy"><span class="photo-number">16 • SAFARI</span></button>
+        <button class="photo"><img src="photo/17.jpg" alt="Satwa 17" loading="lazy"><span class="photo-number">17 • SAFARI</span></button>
+        <button class="photo"><img src="photo/18.jpg" alt="Satwa 18" loading="lazy"><span class="photo-number">18 • SAFARI</span></button>
+    </div>
+</section>
+
+<!-- PLAYLIST SPOTIFY -->
+<section id="playlist" class="section">
+    <div class="section-title">
+        <small>JUNGLE VIBES</small>
+        <h2>Safari <span>Soundtrack</span></h2>
+        <p>Musik bertema petualangan alam untuk menemani jelajah galeri Anda.</p>
+    </div>
+
+    <div class="spotify-card">
+        <div class="music-info">
+            <div class="music-icon">♪</div>
+            <h3>Zoo Playlist</h3>
+            <p>Dengarkan alunan musik yang menenangkan sambil menikmati keindahan fauna.</p>
+            <a class="btn btn-green" target="_blank" href="https://open.spotify.com/playlist/2trxdNXt3IPF10skOMox8A">Buka Spotify ↗</a>
+        </div>
+        <iframe src="https://open.spotify.com/embed/playlist/2trxdNXt3IPF10skOMox8A?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">ZOO<span>EXPLORER</span></div>
+    <p>Mari lestarikan keanekaragaman hayati dan lindungi satwa liar.</p>
+    <strong>🌿 WILDLIFE CONSERVATION 🌿</strong>
+</footer>
+
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox" id="lightbox">
+    <button class="close">&times;</button>
+    <button class="prev">&#8249;</button>
+    <img id="lightboxImage" alt="Galeri Satwa">
+    <button class="next">&#8250;</button>
+    <div class="counter" id="counter">1 / 18</div>
+</div>
+
+<script>
+/* =========================
+   JAVASCRIPT GALERI & LIGHTBOX
+========================= */
+const photos = document.querySelectorAll(".photo");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const counter = document.getElementById("counter");
+
+let currentPhoto = 0;
+
+photos.forEach((photo, index) => {
+    photo.addEventListener("click", () => {
+        currentPhoto = index;
+        showPhoto();
+    });
+});
+
+function showPhoto() {
+    lightboxImage.src = `photo/${currentPhoto + 1}.jpg`;
+    counter.textContent = `${currentPhoto + 1} / 18`;
+    lightbox.classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+document.querySelector(".close").addEventListener("click", () => {
+    lightbox.classList.remove("show");
+    document.body.style.overflow = "";
+});
+
+document.querySelector(".next").addEventListener("click", () => {
+    currentPhoto = (currentPhoto + 1) % 18;
+    showPhoto();
+});
+
+document.querySelector(".prev").addEventListener("click", () => {
+    currentPhoto = (currentPhoto - 1 + 18) % 18;
+    showPhoto();
+});
+
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+        lightbox.classList.remove("show");
+        document.body.style.overflow = "";
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("show")) return;
+
+    if (e.key === "Escape") {
+        lightbox.classList.remove("show");
+        document.body.style.overflow = "";
+    } else if (e.key === "ArrowRight") {
+        currentPhoto = (currentPhoto + 1) % 18;
+        showPhoto();
+    } else if (e.key === "ArrowLeft") {
+        currentPhoto = (currentPhoto - 1 + 18) % 18;
+        showPhoto();
+    }
+});
+
+/* ANIMASI SCROLL DENGAN STAGGER DELAY */
+const galleryObserver = new IntersectionObserver(entries => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            galleryObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+photos.forEach((photo, index) => {
+    photo.style.transitionDelay = `${(index % 3) * 0.1}s`;
+    galleryObserver.observe(photo);
+});
+
+/* ACTIVE NAV ON SCROLL */
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+    let current = "home";
+    sections.forEach(section => {
+        const top = section.offsetTop - 200;
+        if (window.scrollY >= top) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+        }
+    });
+});
+
+/* PARTIKEL ALAM MELAYANG */
+for (let i = 0; i < 30; i++) {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.style.left = Math.random() * 100 + "vw";
+    particle.style.top = Math.random() * 100 + "vh";
+    particle.style.animationDuration = (5 + Math.random() * 8) + "s";
+    particle.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(particle);
+}
+</script>
+
+</body>
+</html>
+
