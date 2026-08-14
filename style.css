@@ -1,0 +1,777 @@
+/* =========================
+   1. RESET & VARIABLES
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --bg-main: #060b08;
+    --card-bg: rgba(18, 30, 22, 0.65);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-border-glow: rgba(74, 222, 128, 0.3);
+    
+    --accent-green: #4ade80;
+    --accent-green-glow: rgba(74, 222, 128, 0.4);
+    --accent-dark-green: #143828;
+    --accent-gold: #fbbf24;
+    
+    --text-primary: #f0fdf4;
+    --text-secondary: #94a3b8;
+    
+    --oneui-radius: 28px;
+    --oneui-radius-sm: 18px;
+    --oneui-radius-pill: 50px;
+}
+
+/* EFEK HITAM PUTIH / GRAYSCALE MODE */
+body.grayscale-mode {
+    filter: grayscale(100%);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    padding-bottom: 120px;
+    min-height: 100vh;
+    transition: filter 0.3s ease;
+}
+
+/* =========================
+   2. 3D BACKGROUND CANVAS
+========================= */
+#bg3dCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.ambient-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: -1;
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.glow-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(74, 222, 128, 0.12);
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.glow-2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(251, 191, 36, 0.08);
+    bottom: 10%;
+    right: -50px;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; transform: scale(0.9) translateX(-50%); }
+    100% { opacity: 1; transform: scale(1.1) translateX(-50%); }
+}
+
+/* =========================
+   3. ONE UI HEADER
+========================= */
+.oneui-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(6, 11, 8, 0.75);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    padding: 24px 24px 18px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-bottom: 1px solid transparent;
+}
+
+.oneui-header.scrolled {
+    padding: 12px 24px;
+    border-bottom-color: var(--card-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-action-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: var(--oneui-radius-pill);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.header-action-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.header-badge {
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--accent-green);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    padding: 6px 14px;
+    border-radius: var(--oneui-radius-pill);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.status-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-green);
+}
+
+.header-title {
+    margin-top: 16px;
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    transition: all 0.3s ease;
+}
+
+.oneui-header.scrolled .header-title {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.header-title span {
+    color: var(--accent-green);
+}
+
+.header-subtitle {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-top: 4px;
+    transition: all 0.3s ease;
+    max-height: 40px;
+    opacity: 1;
+}
+
+.oneui-header.scrolled .header-subtitle {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* =========================
+   4. LAYOUT & CARDS
+========================= */
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 20px;
+    perspective: 1000px;
+}
+
+.section {
+    margin-top: 28px;
+    perspective: 1000px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+    padding: 0 4px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.count-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 12px;
+    border-radius: var(--oneui-radius-pill);
+    border: 1px solid var(--card-border);
+}
+
+.oneui-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--oneui-radius);
+    padding: 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.oneui-card:hover {
+    box-shadow: 0 20px 40px rgba(74, 222, 128, 0.15), 0 0 20px rgba(0, 0, 0, 0.8);
+    border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* Hero Banner Card */
+.hero-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: linear-gradient(135deg, rgba(20, 56, 40, 0.6), rgba(8, 20, 14, 0.8));
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.hero-content p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 480px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.hero-icon {
+    font-size: 72px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Quote Card Widget */
+.quote-card {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(18, 30, 22, 0.7));
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    margin-top: 16px;
+}
+
+.quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.quote-badge {
+    background: rgba(251, 191, 36, 0.15);
+    color: var(--accent-gold);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.quote-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.quote-action-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: var(--oneui-radius-pill);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+}
+
+.quote-action-btn:hover {
+    background: rgba(74, 222, 128, 0.2);
+    border-color: var(--accent-green);
+    transform: translateY(-2px);
+}
+
+.quote-content {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.quote-content.fade-out {
+    opacity: 0;
+    transform: translateY(-5px);
+}
+
+#quoteText {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-style: italic;
+    white-space: pre-wrap;
+}
+
+#quoteText.empty-text {
+    color: var(--text-secondary);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.quote-author {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-green);
+    text-align: right;
+}
+
+.quote-form-container {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.quote-form-container.hidden {
+    display: none;
+}
+
+.quote-form-container input,
+.quote-form-container textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--card-border);
+    border-radius: var(--oneui-radius-sm);
+    padding: 10px 14px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.quote-form-container input:focus,
+.quote-form-container textarea:focus {
+    border-color: var(--accent-green);
+}
+
+.form-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.form-buttons .oneui-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: var(--oneui-radius-sm);
+    padding: 16px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease;
+    transform-style: preserve-3d;
+}
+
+.stat-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent-green);
+}
+
+.stat-label {
+    font-size: 10px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* =========================
+   5. BUTTONS
+========================= */
+.oneui-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--accent-green);
+    color: #041409;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 12px 22px;
+    border-radius: var(--oneui-radius-pill);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px var(--accent-green-glow);
+}
+
+.oneui-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--accent-green-glow);
+}
+
+.oneui-btn:active {
+    transform: scale(0.95);
+}
+
+.oneui-btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+    box-shadow: none;
+}
+
+.oneui-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+}
+
+/* =========================
+   6. GALLERY GRID
+========================= */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+}
+
+.photo-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--oneui-radius-sm);
+    overflow: hidden;
+    background: #0d1711;
+    border: 1px solid var(--card-border);
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.08);
+}
+
+.photo-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(6, 11, 8, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* =========================
+   7. SPOTIFY PLAYER
+========================= */
+.spotify-card {
+    padding: 12px;
+    margin-top: 12px;
+}
+
+.spotify-card iframe {
+    width: 100%;
+    height: 152px;
+    border: 0;
+    border-radius: var(--oneui-radius-sm);
+}
+
+/* =========================
+   8. BOTTOM NAVIGATION
+========================= */
+.bottom-nav {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(440px, 90%);
+    height: 68px;
+    background: rgba(14, 24, 18, 0.82);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--oneui-radius-pill);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    z-index: 999;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 700;
+    width: 30%;
+    height: 82%;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+
+.nav-item .icon {
+    font-size: 20px;
+    margin-bottom: 2px;
+    transition: transform 0.2s ease;
+}
+
+.nav-item.active {
+    color: var(--accent-green);
+    background: rgba(74, 222, 128, 0.12);
+}
+
+.nav-item.active .icon {
+    transform: translateY(-2px);
+}
+
+.nav-item:active {
+    transform: scale(0.92);
+}
+
+/* =========================
+   9. LIGHTBOX MODAL
+========================= */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.lightbox-img-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--oneui-radius);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+    border: 1px solid var(--card-border);
+}
+
+.lightbox img {
+    max-width: 100%;
+    max-height: 68vh;
+    display: block;
+    object-fit: contain;
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox.show img {
+    transform: scale(1);
+}
+
+.lightbox-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 16px;
+    border-radius: var(--oneui-radius-pill);
+    border: 1px solid var(--card-border);
+}
+
+.lb-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lb-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.lb-btn:active {
+    transform: scale(0.88);
+}
+
+.lb-close {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+}
+
+.lb-close:hover {
+    background: rgba(239, 68, 68, 0.4);
+}
+
+.lb-counter {
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 0 8px;
+    letter-spacing: 1px;
+}
+
+/* =========================
+   10. RESPONSIVE MEDIA QUERIES
+========================= */
+@media (max-width: 600px) {
+    .hero-card {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-icon {
+        font-size: 60px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 12px 8px;
+    }
+
+    .stat-number {
+        font-size: 16px;
+    }
+}
