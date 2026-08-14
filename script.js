@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =========================================================
-       9. FITUR GALLERY UNIVERSE (FOTO BUBAR & MENGORBIT 3D)
+       9. FITUR GALLERY UNIVERSE (FOTO BUBAR + LATAR BINTANG & NEBULA)
     ========================================================= */
     function initUniverseGallery() {
         const galleryHeader = document.querySelector(".section-header");
@@ -357,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(exitBtn);
 
         // Variabel Three.js
-        let scene, camera, renderer, photoMeshes = [];
+        let scene, camera, renderer, photoMeshes = [], starsMesh, nebulaParticles;
         let animationFrameId;
 
         function startUniverse() {
@@ -365,35 +365,75 @@ document.addEventListener("DOMContentLoaded", () => {
             exitBtn.classList.add("show");
             document.body.style.overflow = "hidden";
 
+            // Setup Scene & Camera
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 12;
+            camera.position.z = 14;
 
             renderer = new THREE.WebGLRenderer({ canvas: universeCanvas, alpha: true, antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+            // --- LATAR BELAKANG 1: BINTANG-BINTANG (STARFIELD 3D) ---
+            const starsCount = 1500;
+            const starsGeo = new THREE.BufferGeometry();
+            const starsPos = new Float32Array(starsCount * 3);
+
+            for (let i = 0; i < starsCount * 3; i++) {
+                starsPos[i] = (Math.random() - 0.5) * 80; // Sebar bintang di area luas
+            }
+            starsGeo.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
+
+            const starsMat = new THREE.PointsMaterial({
+                size: 0.08,
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.9
+            });
+            starsMesh = new THREE.Points(starsGeo, starsMat);
+            scene.add(starsMesh);
+
+            // --- LATAR BELAKANG 2: KABUT NEBULA HIJAU & BIRU ---
+            const nebulaCount = 200;
+            const nebulaGeo = new THREE.BufferGeometry();
+            const nebulaPos = new Float32Array(nebulaCount * 3);
+
+            for (let i = 0; i < nebulaCount * 3; i++) {
+                nebulaPos[i] = (Math.random() - 0.5) * 40;
+            }
+            nebulaGeo.setAttribute('position', new THREE.BufferAttribute(nebulaPos, 3));
+
+            const nebulaMat = new THREE.PointsMaterial({
+                size: 0.4,
+                color: 0x4ade80, // Hijau Glow
+                transparent: true,
+                opacity: 0.3
+            });
+            nebulaParticles = new THREE.Points(nebulaGeo, nebulaMat);
+            scene.add(nebulaParticles);
+
+            // --- FOTO-FOTO KELAS MENGORBIT ---
             const textureLoader = new THREE.TextureLoader();
             photoMeshes = [];
 
-            // Setiap Foto Menjadi Objek 3D Mengorbit
             for (let i = 1; i <= totalPhotos; i++) {
                 const texture = textureLoader.load(`photo/${i}.jpg`);
-                const geometry = new THREE.PlaneGeometry(1.8, 1.2);
+                const geometry = new THREE.PlaneGeometry(2.2, 1.4); // Ukuran foto sedikit lebih besar & jelas
                 const material = new THREE.MeshBasicMaterial({ 
                     map: texture, 
                     side: THREE.DoubleSide 
                 });
                 const mesh = new THREE.Mesh(geometry, material);
 
-                const radius = 4 + Math.random() * 6;
+                // Radius dan sudut unik tiap foto
+                const radius = 5 + Math.random() * 7;
                 const angle = (i / totalPhotos) * Math.PI * 2;
-                const height = (Math.random() - 0.5) * 6;
+                const height = (Math.random() - 0.5) * 8;
 
                 mesh.userData = {
                     radius: radius,
                     angle: angle,
-                    speed: 0.005 + Math.random() * 0.008,
+                    speed: 0.003 + Math.random() * 0.005, // Kecepatan putar lembut
                     height: height
                 };
 
@@ -405,14 +445,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 photoMeshes.push(mesh);
             }
 
+            // Loop Animasi Pergerakan
             function animateUniverse() {
                 animationFrameId = requestAnimationFrame(animateUniverse);
 
+                // Rotasi Latar Bintang & Nebula
+                starsMesh.rotation.y += 0.0002;
+                starsMesh.rotation.x += 0.0001;
+                nebulaParticles.rotation.y -= 0.0005;
+
+                // Rotasi Foto-foto Mengorbit
                 photoMeshes.forEach(mesh => {
                     mesh.userData.angle += mesh.userData.speed;
                     mesh.position.x = Math.cos(mesh.userData.angle) * mesh.userData.radius;
                     mesh.position.z = Math.sin(mesh.userData.angle) * mesh.userData.radius;
-                    mesh.position.y = mesh.userData.height + Math.sin(mesh.userData.angle * 2) * 0.5;
+                    mesh.position.y = mesh.userData.height + Math.sin(mesh.userData.angle * 1.5) * 0.4;
+                    
+                    // Supaya foto selalu menghadap kamera
                     mesh.lookAt(camera.position);
                 });
 
