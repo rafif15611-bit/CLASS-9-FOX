@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZOO EXPLORER • OneUI Pro 3D Edition 🦁</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- CANVAS ANIMASI 3D BACKGROUND -->
+    <canvas id="bg3dCanvas"></canvas>
+
+    <!-- Ambient Glow background -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- ONE UI COLLAPSIBLE HEADER -->
+    <header class="oneui-header" id="header">
+        <div class="header-top">
+            <span class="header-badge">🌿 SAFARI V.2</span>
+            <div class="header-right-actions">
+                <!-- TOMBOL TOGGLE HITAM PUTIH -->
+                <button id="grayscaleBtn" class="header-action-btn" title="Toggle Mode Hitam Putih">◑ Hitam Putih</button>
+                <div class="status-pill">
+                    <span class="status-dot"></span> Buka Hari Ini
+                </div>
+            </div>
+        </div>
+        <h1 class="header-title">ZOO <span>EXPLORER</span></h1>
+        <p class="header-subtitle">Jelajahi keajaiban fauna dan alam liar dalam antarmuka flagship modern.</p>
+    </header>
+
+    <main class="container">
+        <!-- HERO / BANNER SECTION -->
+        <section id="home" class="section">
+            <div class="oneui-card hero-card">
+                <div class="hero-content">
+                    <h2>Jelajah Satwa Liar 🦁</h2>
+                    <p>Selamat datang di galeri petualangan kebun binatang. Temukan keberagaman flora dan fauna pilihan dari penjuru dunia.</p>
+                    <div class="hero-actions">
+                        <a href="#galeri" class="oneui-btn">
+                            <span>Mulai Jelajah</span>
+                            <span class="btn-icon">↓</span>
+                        </a>
+                        <a href="#playlist" class="oneui-btn oneui-btn-secondary">
+                            <span>Putar Musik</span>
+                            <span class="btn-icon">🎵</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-icon">🌿</div>
+                </div>
+            </div>
+
+            <!-- WIDGET PESAN & KATA-KATA CUSTOM (KOSONG DARI AWAL) -->
+            <div class="oneui-card quote-card">
+                <div class="quote-header">
+                    <span class="quote-badge">💡 PESAN & KATA-KATA</span>
+                    <div class="quote-actions">
+                        <button id="addQuoteBtn" class="quote-action-btn" title="Tulis Pesan Baru">✏️ Tulis Pesan</button>
+                    </div>
+                </div>
+                
+                <div class="quote-content" id="quoteContent">
+                    <p id="quoteText" class="empty-text">Belum ada pesan. Klik "Tulis Pesan" untuk menambahkan kata-kata dari kamu atau temanmu!</p>
+                    <span id="quoteAuthor" class="quote-author"></span>
+                </div>
+
+                <!-- FORM INPUT MODAL -->
+                <div id="quoteForm" class="quote-form-container hidden">
+                    <input type="text" id="inputAuthor" placeholder="Nama / Pengirim (contoh: Temanmu)" maxlength="30">
+                    <textarea id="inputText" placeholder="Tuliskan kata-kata atau pesan sepuasnya di sini..." rows="3" maxlength="250"></textarea>
+                    <div class="form-buttons">
+                        <button id="saveQuoteBtn" class="oneui-btn">Simpan Pesan ✨</button>
+                        <button id="cancelQuoteBtn" class="oneui-btn oneui-btn-secondary">Batal</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUICK STATS DASHBOARD -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">17+</span>
+                    <span class="stat-label">Dokumentasi Satwa</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">08:00</span>
+                    <span class="stat-label">Jam Operasional</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Pengalaman Interaktif</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERI SECTION -->
+        <section id="galeri" class="section">
+            <div class="section-header">
+                <div>
+                    <div class="section-label">Koleksi Eksklusif</div>
+                    <h3 class="section-title">Galeri Satwa Safari</h3>
+                </div>
+                <span class="count-badge" id="totalCount">17 Foto</span>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Di-generate otomatis via JS -->
+            </div>
+        </section>
+
+        <!-- SOUNDTRACK SECTION -->
+        <section id="playlist" class="section">
+            <div class="section-label">Atmospheric Audio</div>
+            <h3 class="section-title">Safari Ambient Soundtrack</h3>
+            
+            <div class="oneui-card spotify-card">
+                <iframe src="https://open.spotify.com/embed/playlist/2trxdNXt3IPF10skOMox8A?utm_source=generator&theme=0" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <!-- BOTTOM NAVIGATION (ONE UI FLOATING STYLE) -->
+    <nav class="bottom-nav">
+        <a href="#home" class="nav-item active" data-target="home">
+            <span class="icon">🏠</span>
+            <span>Utama</span>
+        </a>
+        <a href="#galeri" class="nav-item" data-target="galeri">
+            <span class="icon">🐾</span>
+            <span>Satwa</span>
+        </a>
+        <a href="#playlist" class="nav-item" data-target="playlist">
+            <span class="icon">🎵</span>
+            <span>Soundtrack</span>
+        </a>
+    </nav>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-wrapper">
+            <div class="lightbox-img-container">
+                <img id="lightboxImg" src="" alt="Detail Satwa">
+            </div>
+            
+            <div class="lightbox-controls">
+                <button class="lb-btn" id="prevBtn" title="Foto Sebelumnya">‹</button>
+                <div class="lb-counter" id="counter">1 / 17</div>
+                <button class="lb-btn" id="nextBtn" title="Foto Selanjutnya">›</button>
+                <button class="lb-btn lb-close" id="closeBtn" title="Tutup">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Library Three.js untuk Animasi 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
