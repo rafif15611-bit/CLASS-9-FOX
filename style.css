@@ -569,7 +569,7 @@ body {
 }
 
 /* =========================
-   EFEK UNIVERSE GALLERY
+   EFEK UNIVERSE GALLERY (NEBULA & STAR FIELD)
 ========================= */
 .universe-toggle-btn {
     background: linear-gradient(135deg, #4ade80, #3b82f6);
@@ -589,6 +589,7 @@ body {
     box-shadow: 0 0 25px rgba(74, 222, 128, 0.7);
 }
 
+/* Canvas Mode Universe dengan Latar Space Cosmic */
 #universeCanvas {
     position: fixed;
     top: 0;
@@ -596,8 +597,7 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 1500;
-    background: rgba(6, 11, 8, 0.95);
-    backdrop-filter: blur(20px);
+    background: radial-gradient(circle at center, #0b1e19 0%, #030806 70%, #000000 100%);
     display: none;
 }
 
@@ -619,6 +619,12 @@ body {
     cursor: pointer;
     display: none;
     box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+    transition: all 0.2s ease;
+}
+
+.exit-universe-btn:hover {
+    transform: scale(1.05);
+    background: #dc2626;
 }
 
 .exit-universe-btn.show {
