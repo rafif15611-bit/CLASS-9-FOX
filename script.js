@@ -10,7 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const indexFormatted = i < 10 ? `0${i}` : `${i}`;
             const button = document.createElement("button");
             
-            button.className = "photo-item";
+            // Tambahkan class 'photo-wide' khusus untuk foto nomor 17
+            if (i === 17) {
+                button.className = "photo-item photo-wide";
+            } else {
+                button.className = "photo-item";
+            }
+
             button.setAttribute("data-index", i - 1);
             button.setAttribute("aria-label", `Lihat Satwa Momen ${i}`);
             
